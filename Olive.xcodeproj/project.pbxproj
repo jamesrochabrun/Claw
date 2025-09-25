@@ -262,7 +262,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\n# Build script for ApprovalMCPServer\n# This script builds the ApprovalMCPServer executable from the ClaudeCodeApprovalServer package\n\nset -e\n\n# Use the SPM checkout location that Xcode manages\nOFFICIAL_PACKAGE_PATH=\"${BUILD_DIR}/../../SourcePackages/checkouts/ClaudeCodeApprovalServer\"\n\nif [ ! -d \"$OFFICIAL_PACKAGE_PATH\" ]; then\n    echo \"Error: ClaudeCodeApprovalServer package not found at: $OFFICIAL_PACKAGE_PATH\"\n    echo \"Make sure packages are resolved in Xcode\"\n    exit 1\nfi\n\necho \"Using ClaudeCodeApprovalServer package at: $OFFICIAL_PACKAGE_PATH\"\ncd \"$OFFICIAL_PACKAGE_PATH\"\n\n# Determine configuration from Xcode\nif [ \"$CONFIGURATION\" == \"Release\" ]; then\n    BUILD_CONFIG=\"release\"\nelse\n    BUILD_CONFIG=\"debug\"\nfi\n\necho \"Building ApprovalMCPServer in $BUILD_CONFIG configuration...\"\n\n# Build the server\nif [ \"$BUILD_CONFIG\" == \"release\" ]; then\n    swift build -c release --product ApprovalMCPServer\n    EXECUTABLE_PATH=\".build/release/ApprovalMCPServer\"\nelse\n    swift build -c debug --product ApprovalMCPServer\n    EXECUTABLE_PATH=\".build/debug/ApprovalMCPServer\"\nfi\n\necho \"ApprovalMCPServer built successfully at: $EXECUTABLE_PATH\"\n\n# Sign the executable with hardened runtime for notarization\nif [ -n \"$CODE_SIGN_IDENTITY\" ] && [ \"$CODE_SIGN_IDENTITY\" != \"-\" ]; then\n    echo \"Signing ApprovalMCPServer with identity: $CODE_SIGN_IDENTITY\"\n    \n    codesign --force \\\n        --sign \"$CODE_SIGN_IDENTITY\" \\\n        --options runtime \\\n        --timestamp \\\n        \"$EXECUTABLE_PATH\" || echo \"Warning: Failed to sign ApprovalMCPServer\"\nelse\n    echo \"Skipping code signing (CODE_SIGN_IDENTITY not set or is '-')\"\nfi\n\n# Copy to app bundle Resources\nRESOURCES_DIR=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Resources\"\nmkdir -p \"$RESOURCES_DIR\"\ncp \"$EXECUTABLE_PATH\" \"$RESOURCES_DIR/ApprovalMCPServer\"\nchmod +x \"$RESOURCES_DIR/ApprovalMCPServer\"\n\necho \"✅ ApprovalMCPServer bundled successfully\"\necho \"Build complete!\"\n\n";
+			shellScript = "/bin/bash \"${SRCROOT}/bundle_server.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -621,7 +621,7 @@
 			repositoryURL = "https://github.com/jamesrochabrun/ClaudeCodeUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.7;
+				minimumVersion = 1.4.9;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
