@@ -15,7 +15,7 @@ struct ContentView: View {
     // Start with the SDK's NVM-aware configuration
     var config = ClaudeCodeConfiguration.withNvmSupport()
     config.enableDebugLogging = true
-    
+    config.disallowedTools = ["MultiEdit"] // TODO: fix MultiEdit Tool.
     let homeDir = NSHomeDirectory()
     
     // PRIORITY 1: Check for local Claude installation (usually the newest version)
