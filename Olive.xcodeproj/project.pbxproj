@@ -262,7 +262,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/bash \"${SRCROOT}/bundle_server.sh\"\n";
+			shellScript = "bash \"${PROJECT_DIR}/bundle_server.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -621,7 +621,7 @@
 			repositoryURL = "https://github.com/jamesrochabrun/ClaudeCodeUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.9;
+				minimumVersion = 1.5.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

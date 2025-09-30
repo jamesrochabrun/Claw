@@ -63,7 +63,3 @@ struct ContentView: View {
         workingDirectoryToolTip: "Tip: Select a folder to enable AI assistance"))
   }
 }
-
-#Preview {
-  ContentView()
-}
