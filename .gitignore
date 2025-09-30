@@ -1,0 +1,16 @@
+# Xcode user-specific files
+*.xcuserstate
+*.xcuserdatad
+xcuserdata/
+
+# Build artifacts
+DerivedData/
+build/
+*.build/
+
+# SPM
+.swiftpm/
+.build/
+
+# macOS
+.DS_Store
