@@ -18,15 +18,36 @@ SERVER_DEST="${RESOURCES_DIR}/${SERVER_NAME}"
 # Create Resources directory if it doesn't exist
 mkdir -p "${RESOURCES_DIR}"
 
-# Find the package checkout directory
-PACKAGE_DIR="${BUILD_DIR}/../../../SourcePackages/checkouts/ClaudeCodeApprovalServer"
+# Find the package checkout directory - try multiple locations
+POSSIBLE_PATHS=(
+  "${BUILD_DIR}/../../../SourcePackages/checkouts/ClaudeCodeApprovalServer"
+  "${PROJECT_DIR}/../../../SourcePackages/checkouts/ClaudeCodeApprovalServer"
+  "${SRCROOT}/../../../SourcePackages/checkouts/ClaudeCodeApprovalServer"
+  ~/Library/Developer/Xcode/DerivedData/*/SourcePackages/checkouts/ClaudeCodeApprovalServer
+)
 
-if [ ! -d "${PACKAGE_DIR}" ]; then
-    echo "Error: ClaudeCodeApprovalServer package not found at ${PACKAGE_DIR}"
+PACKAGE_DIR=""
+for path in "${POSSIBLE_PATHS[@]}"; do
+  # Expand glob patterns
+  for expanded_path in $path; do
+    if [ -d "$expanded_path" ]; then
+      PACKAGE_DIR="$expanded_path"
+      break 2
+    fi
+  done
+done
+
+if [ -z "${PACKAGE_DIR}" ] || [ ! -d "${PACKAGE_DIR}" ]; then
+    echo "Error: ClaudeCodeApprovalServer package not found"
+    echo "Tried locations:"
+    for path in "${POSSIBLE_PATHS[@]}"; do
+      echo "  - $path"
+    done
     echo "Make sure the package is added to your Xcode project"
     exit 1
 fi
 
+echo "Found package at: ${PACKAGE_DIR}"
 echo "Building ${PRODUCT_NAME_IN_PACKAGE} from source..."
 
 # Build the executable using swift build
@@ -49,7 +70,15 @@ cp "${SERVER_SOURCE}" "${SERVER_DEST}"
 # Make sure it's executable
 chmod +x "${SERVER_DEST}"
 
-echo "Successfully bundled ClaudeCodeApprovalServer to ${SERVER_DEST}"
+# Sign with hardened runtime and entitlements
+echo "Signing ${SERVER_NAME} with hardened runtime..."
+codesign --force --sign "${EXPANDED_CODE_SIGN_IDENTITY}" \
+  --options runtime \
+  --entitlements "${SRCROOT}/Olive/Olive.entitlements" \
+  --timestamp \
+  "${SERVER_DEST}"
+
+echo "Successfully bundled and signed ClaudeCodeApprovalServer to ${SERVER_DEST}"
 
 # Verify the bundle
 if [ -f "${SERVER_DEST}" ]; then
