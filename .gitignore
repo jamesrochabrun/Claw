@@ -7,6 +7,7 @@ xcuserdata/
 DerivedData/
 build/
 *.build/
+dist/
 
 # SPM
 .swiftpm/
