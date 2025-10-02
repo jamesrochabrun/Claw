@@ -4,7 +4,7 @@
 # This script creates a DMG installer for the Olive app
 
 APP_NAME="Olive"
-VERSION="1.0.0"
+VERSION="1.0.2"
 DMG_NAME="${APP_NAME}-${VERSION}.dmg"
 VOLUME_NAME="${APP_NAME}"
 SOURCE_DIR="./build"
@@ -16,13 +16,7 @@ echo "🔨 Creating DMG for ${APP_NAME} v${VERSION}..."
 mkdir -p "${DMG_DIR}"
 mkdir -p "${SOURCE_DIR}"
 
-echo "📦 Step 1: Build the app in Xcode first"
-echo "   - Open Olive.xcodeproj in Xcode"
-echo "   - Select Product > Archive"
-echo "   - Export the archive as 'Copy App'"
-echo "   - Place the exported Olive.app in the ./build directory"
-echo ""
-read -p "Press Enter when you've placed Olive.app in ./build directory..."
+echo "📦 Checking for Olive.app in ./build directory..."
 
 # Check if app exists
 if [ ! -d "${SOURCE_DIR}/${APP_NAME}.app" ]; then
