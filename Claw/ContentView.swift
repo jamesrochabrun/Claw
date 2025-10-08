@@ -45,11 +45,11 @@ struct ContentView: View {
     ClaudeCodeContainer(
       claudeCodeConfiguration: config,
       uiConfiguration: UIConfiguration(
-        appName: "🦀 Claw",
+        appName: "🦀 Claw Code",
         showSettingsInNavBar: true,
         showRiskData: false,
         workingDirectoryToolTip: "Tip: Select a folder to enable AI assistance"))
-    .background(colorScheme == .dark ? Color(hue: 0.361, saturation: 0.414, brightness: 0.05) : .clear)
+    .background(colorScheme == .dark ? Color(hue: 0.08, saturation: 0.3, brightness: 0.05) : .clear)
   }
 
   @Environment(\.colorScheme) var colorScheme
