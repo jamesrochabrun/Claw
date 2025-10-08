@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "olive16.png",
+      "filename" : "clawFinal 9.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "olive32 1.png",
+      "filename" : "clawFinal 8.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "olive32.png",
+      "filename" : "clawFinal 7.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "olive64.png",
+      "filename" : "clawFinal 6.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "olive 1.png",
+      "filename" : "clawFinal 5.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "olive256.png",
+      "filename" : "clawFinal 4.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "olive256 1.png",
+      "filename" : "clawFinal 3.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "olive512 1.png",
+      "filename" : "clawFinal 1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "olive512.png",
+      "filename" : "clawFinal 2.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "olive.png",
+      "filename" : "clawFinal.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
