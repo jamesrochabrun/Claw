@@ -1,13 +1,13 @@
 //
-//  OliveUITestsLaunchTests.swift
-//  OliveUITests
+//  ClawUITestsLaunchTests.swift
+//  ClawUITests
 //
 //  Created by James Rochabrun on 9/20/25.
 //
 
 import XCTest
 
-final class OliveUITestsLaunchTests: XCTestCase {
+final class ClawUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
