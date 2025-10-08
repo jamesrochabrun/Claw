@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Olive
+//  Claw
 //
 //  Created by James Rochabrun on 9/20/25.
 //
@@ -25,19 +25,7 @@ struct ContentView: View {
       // Insert at beginning for highest priority
       config.additionalPaths.insert(localClaudePath, at: 0)
     }
-    
-    // PRIORITY 2: Check if user has manually specified Claude path (override everything)
-    let prefs = UserDefaults.standard
-    if let claudePath = prefs.string(forKey: "global.claudePath"),
-       !claudePath.isEmpty,
-       FileManager.default.fileExists(atPath: claudePath) {
-      let url = URL(fileURLWithPath: claudePath)
-      let directory = url.deletingLastPathComponent().path
-      // Insert at beginning for absolute highest priority
-      config.additionalPaths.insert(directory, at: 0)
-    }
-    
-    // PRIORITY 3: Add essential system paths and common development tools
+    // PRIORITY 2: Add essential system paths and common development tools
     // The SDK uses /bin/zsh -l -c which loads the user's shell environment,
     // so these are mainly fallbacks for tools installed in standard locations
     config.additionalPaths.append(contentsOf: [
@@ -57,11 +45,11 @@ struct ContentView: View {
     ClaudeCodeContainer(
       claudeCodeConfiguration: config,
       uiConfiguration: UIConfiguration(
-        appName: "Olive",
+        appName: "🦀 Claw Code",
         showSettingsInNavBar: true,
         showRiskData: false,
         workingDirectoryToolTip: "Tip: Select a folder to enable AI assistance"))
-    .background(colorScheme == .dark ? Color(hue: 0.361, saturation: 0.414, brightness: 0.05) : .clear)
+    .background(colorScheme == .dark ? Color(hue: 0.08, saturation: 0.3, brightness: 0.05) : .clear)
   }
 
   @Environment(\.colorScheme) var colorScheme

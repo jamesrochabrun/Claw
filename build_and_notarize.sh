@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Build, sign, and notarize Olive app for distribution
+# Build, sign, and notarize Claw app for distribution
 set -e
 
-APP_NAME="Olive"
-SCHEME="Olive"
-BUNDLE_ID="jamesRochabrun.Olive"
+APP_NAME="Claw"
+SCHEME="Claw"
+BUNDLE_ID="jamesRochabrun.Claw"
 TEAM_ID="CQ45U4X9K3"
 IDENTITY="Developer ID Application: James Rochabrun (CQ45U4X9K3)"
 VERSION="1.0.2"
