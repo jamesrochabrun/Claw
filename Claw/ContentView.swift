@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Olive
+//  Claw
 //
 //  Created by James Rochabrun on 9/20/25.
 //
@@ -45,7 +45,7 @@ struct ContentView: View {
     ClaudeCodeContainer(
       claudeCodeConfiguration: config,
       uiConfiguration: UIConfiguration(
-        appName: "🫒live",
+        appName: "🦀 Claw",
         showSettingsInNavBar: true,
         showRiskData: false,
         workingDirectoryToolTip: "Tip: Select a folder to enable AI assistance"))
