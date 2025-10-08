@@ -1,14 +1,14 @@
 //
-//  OliveTests.swift
-//  OliveTests
+//  ClawTests.swift
+//  ClawTests
 //
 //  Created by James Rochabrun on 9/20/25.
 //
 
 import Testing
-@testable import Olive
+@testable import Claw
 
-struct OliveTests {
+struct ClawTests {
 
     @Test func example() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.

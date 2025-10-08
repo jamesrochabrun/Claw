@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Build and sign Olive app for distribution (without notarization for now)
+# Build and sign Claw app for distribution (without notarization for now)
 set -e
 
-APP_NAME="Olive"
-SCHEME="Olive"
+APP_NAME="Claw"
+SCHEME="Claw"
 TEAM_ID="YOUR_TEAM_ID"
 IDENTITY="Developer ID Application: James Rochabrun (YOUR_TEAM_ID)"
 

@@ -1,13 +1,13 @@
 //
-//  OliveUITests.swift
-//  OliveUITests
+//  ClawUITests.swift
+//  ClawUITests
 //
 //  Created by James Rochabrun on 9/20/25.
 //
 
 import XCTest
 
-final class OliveUITests: XCTestCase {
+final class ClawUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
