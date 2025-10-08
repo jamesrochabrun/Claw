@@ -74,7 +74,7 @@ chmod +x "${SERVER_DEST}"
 echo "Signing ${SERVER_NAME} with hardened runtime..."
 codesign --force --sign "${EXPANDED_CODE_SIGN_IDENTITY}" \
   --options runtime \
-  --entitlements "${SRCROOT}/Olive/Olive.entitlements" \
+  --entitlements "${SRCROOT}/Claw/Claw.entitlements" \
   --timestamp \
   "${SERVER_DEST}"
 

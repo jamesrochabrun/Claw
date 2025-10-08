@@ -25,19 +25,7 @@ struct ContentView: View {
       // Insert at beginning for highest priority
       config.additionalPaths.insert(localClaudePath, at: 0)
     }
-    
-    // PRIORITY 2: Check if user has manually specified Claude path (override everything)
-    let prefs = UserDefaults.standard
-    if let claudePath = prefs.string(forKey: "global.claudePath"),
-       !claudePath.isEmpty,
-       FileManager.default.fileExists(atPath: claudePath) {
-      let url = URL(fileURLWithPath: claudePath)
-      let directory = url.deletingLastPathComponent().path
-      // Insert at beginning for absolute highest priority
-      config.additionalPaths.insert(directory, at: 0)
-    }
-    
-    // PRIORITY 3: Add essential system paths and common development tools
+    // PRIORITY 2: Add essential system paths and common development tools
     // The SDK uses /bin/zsh -l -c which loads the user's shell environment,
     // so these are mainly fallbacks for tools installed in standard locations
     config.additionalPaths.append(contentsOf: [
@@ -57,7 +45,7 @@ struct ContentView: View {
     ClaudeCodeContainer(
       claudeCodeConfiguration: config,
       uiConfiguration: UIConfiguration(
-        appName: "Olive",
+        appName: "🫒live",
         showSettingsInNavBar: true,
         showRiskData: false,
         workingDirectoryToolTip: "Tip: Select a folder to enable AI assistance"))

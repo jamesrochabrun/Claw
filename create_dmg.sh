@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Olive DMG Creator Script
-# This script creates a DMG installer for the Olive app
+# Claw DMG Creator Script
+# This script creates a DMG installer for the Claw app
 
-APP_NAME="Olive"
+APP_NAME="Claw"
 VERSION="1.0.2"
 DMG_NAME="${APP_NAME}-${VERSION}.dmg"
 VOLUME_NAME="${APP_NAME}"
@@ -16,7 +16,7 @@ echo "🔨 Creating DMG for ${APP_NAME} v${VERSION}..."
 mkdir -p "${DMG_DIR}"
 mkdir -p "${SOURCE_DIR}"
 
-echo "📦 Checking for Olive.app in ./build directory..."
+echo "📦 Checking for Claw.app in ./build directory..."
 
 # Check if app exists
 if [ ! -d "${SOURCE_DIR}/${APP_NAME}.app" ]; then

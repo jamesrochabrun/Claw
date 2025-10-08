@@ -1,9 +1,9 @@
-# Olive Agent Setup Documentation
+# Claw Agent Setup Documentation
 
 ## Setup Checklist
 
 ### 1. App Entitlements Configuration
-Configure in `Olive.entitlements`:
+Configure in `Claw.entitlements`:
 
 **Removed Entitlements:**
 - App Sandbox: Set to `NO` (removed `com.apple.security.app-sandbox`)

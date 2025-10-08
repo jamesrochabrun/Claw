@@ -17,37 +17,37 @@
 			containerPortal = 7B67B4C52E7FD5C6006A8EB2 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7B67B4CC2E7FD5C6006A8EB2;
-			remoteInfo = Olive;
+			remoteInfo = Claw;
 		};
 		7B67B4E52E7FD5C8006A8EB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7B67B4C52E7FD5C6006A8EB2 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7B67B4CC2E7FD5C6006A8EB2;
-			remoteInfo = Olive;
+			remoteInfo = Claw;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7B67B4CD2E7FD5C6006A8EB2 /* Olive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Olive.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B67B4DA2E7FD5C8006A8EB2 /* OliveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OliveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B67B4E42E7FD5C8006A8EB2 /* OliveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OliveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B67B4CD2E7FD5C6006A8EB2 /* Claw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Claw.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B67B4DA2E7FD5C8006A8EB2 /* ClawTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClawTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B67B4E42E7FD5C8006A8EB2 /* ClawUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClawUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		7B67B4CF2E7FD5C6006A8EB2 /* Olive */ = {
+		7B67B4CF2E7FD5C6006A8EB2 /* Claw */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Olive;
+			path = Claw;
 			sourceTree = "<group>";
 		};
-		7B67B4DD2E7FD5C8006A8EB2 /* OliveTests */ = {
+		7B67B4DD2E7FD5C8006A8EB2 /* ClawTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OliveTests;
+			path = ClawTests;
 			sourceTree = "<group>";
 		};
-		7B67B4E72E7FD5C8006A8EB2 /* OliveUITests */ = {
+		7B67B4E72E7FD5C8006A8EB2 /* ClawUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OliveUITests;
+			path = ClawUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -82,9 +82,9 @@
 		7B67B4C42E7FD5C6006A8EB2 = {
 			isa = PBXGroup;
 			children = (
-				7B67B4CF2E7FD5C6006A8EB2 /* Olive */,
-				7B67B4DD2E7FD5C8006A8EB2 /* OliveTests */,
-				7B67B4E72E7FD5C8006A8EB2 /* OliveUITests */,
+				7B67B4CF2E7FD5C6006A8EB2 /* Claw */,
+				7B67B4DD2E7FD5C8006A8EB2 /* ClawTests */,
+				7B67B4E72E7FD5C8006A8EB2 /* ClawUITests */,
 				7B67B4CE2E7FD5C6006A8EB2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,9 +92,9 @@
 		7B67B4CE2E7FD5C6006A8EB2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7B67B4CD2E7FD5C6006A8EB2 /* Olive.app */,
-				7B67B4DA2E7FD5C8006A8EB2 /* OliveTests.xctest */,
-				7B67B4E42E7FD5C8006A8EB2 /* OliveUITests.xctest */,
+				7B67B4CD2E7FD5C6006A8EB2 /* Claw.app */,
+				7B67B4DA2E7FD5C8006A8EB2 /* ClawTests.xctest */,
+				7B67B4E42E7FD5C8006A8EB2 /* ClawUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,9 +102,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7B67B4CC2E7FD5C6006A8EB2 /* Olive */ = {
+		7B67B4CC2E7FD5C6006A8EB2 /* Claw */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B67B4EE2E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "Olive" */;
+			buildConfigurationList = 7B67B4EE2E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "Claw" */;
 			buildPhases = (
 				7B67B4C92E7FD5C6006A8EB2 /* Sources */,
 				7B67B4CA2E7FD5C6006A8EB2 /* Frameworks */,
@@ -116,20 +116,20 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				7B67B4CF2E7FD5C6006A8EB2 /* Olive */,
+				7B67B4CF2E7FD5C6006A8EB2 /* Claw */,
 			);
-			name = Olive;
+			name = Claw;
 			packageProductDependencies = (
 				7B67B4F82E7FD5F3006A8EB2 /* ApprovalServerKit */,
 				7B67B4FB2E7FD624006A8EB2 /* ClaudeCodeCore */,
 			);
-			productName = Olive;
-			productReference = 7B67B4CD2E7FD5C6006A8EB2 /* Olive.app */;
+			productName = Claw;
+			productReference = 7B67B4CD2E7FD5C6006A8EB2 /* Claw.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7B67B4D92E7FD5C8006A8EB2 /* OliveTests */ = {
+		7B67B4D92E7FD5C8006A8EB2 /* ClawTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B67B4F12E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "OliveTests" */;
+			buildConfigurationList = 7B67B4F12E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "ClawTests" */;
 			buildPhases = (
 				7B67B4D62E7FD5C8006A8EB2 /* Sources */,
 				7B67B4D72E7FD5C8006A8EB2 /* Frameworks */,
@@ -141,18 +141,18 @@
 				7B67B4DC2E7FD5C8006A8EB2 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				7B67B4DD2E7FD5C8006A8EB2 /* OliveTests */,
+				7B67B4DD2E7FD5C8006A8EB2 /* ClawTests */,
 			);
-			name = OliveTests;
+			name = ClawTests;
 			packageProductDependencies = (
 			);
-			productName = OliveTests;
-			productReference = 7B67B4DA2E7FD5C8006A8EB2 /* OliveTests.xctest */;
+			productName = ClawTests;
+			productReference = 7B67B4DA2E7FD5C8006A8EB2 /* ClawTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7B67B4E32E7FD5C8006A8EB2 /* OliveUITests */ = {
+		7B67B4E32E7FD5C8006A8EB2 /* ClawUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B67B4F42E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "OliveUITests" */;
+			buildConfigurationList = 7B67B4F42E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "ClawUITests" */;
 			buildPhases = (
 				7B67B4E02E7FD5C8006A8EB2 /* Sources */,
 				7B67B4E12E7FD5C8006A8EB2 /* Frameworks */,
@@ -164,13 +164,13 @@
 				7B67B4E62E7FD5C8006A8EB2 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				7B67B4E72E7FD5C8006A8EB2 /* OliveUITests */,
+				7B67B4E72E7FD5C8006A8EB2 /* ClawUITests */,
 			);
-			name = OliveUITests;
+			name = ClawUITests;
 			packageProductDependencies = (
 			);
-			productName = OliveUITests;
-			productReference = 7B67B4E42E7FD5C8006A8EB2 /* OliveUITests.xctest */;
+			productName = ClawUITests;
+			productReference = 7B67B4E42E7FD5C8006A8EB2 /* ClawUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -196,7 +196,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7B67B4C82E7FD5C6006A8EB2 /* Build configuration list for PBXProject "Olive" */;
+			buildConfigurationList = 7B67B4C82E7FD5C6006A8EB2 /* Build configuration list for PBXProject "Claw" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -214,9 +214,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7B67B4CC2E7FD5C6006A8EB2 /* Olive */,
-				7B67B4D92E7FD5C8006A8EB2 /* OliveTests */,
-				7B67B4E32E7FD5C8006A8EB2 /* OliveUITests */,
+				7B67B4CC2E7FD5C6006A8EB2 /* Claw */,
+				7B67B4D92E7FD5C8006A8EB2 /* ClawTests */,
+				7B67B4E32E7FD5C8006A8EB2 /* ClawUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -293,12 +293,12 @@
 /* Begin PBXTargetDependency section */
 		7B67B4DC2E7FD5C8006A8EB2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7B67B4CC2E7FD5C6006A8EB2 /* Olive */;
+			target = 7B67B4CC2E7FD5C6006A8EB2 /* Claw */;
 			targetProxy = 7B67B4DB2E7FD5C8006A8EB2 /* PBXContainerItemProxy */;
 		};
 		7B67B4E62E7FD5C8006A8EB2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7B67B4CC2E7FD5C6006A8EB2 /* Olive */;
+			target = 7B67B4CC2E7FD5C6006A8EB2 /* Claw */;
 			targetProxy = 7B67B4E52E7FD5C8006A8EB2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -443,7 +443,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.Olive;
+				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.Claw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -460,7 +460,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Olive/Olive.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Claw/Claw.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -475,7 +475,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.Olive;
+				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.Claw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -497,14 +497,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.OliveTests;
+				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.ClawTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Olive.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Olive";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Claw.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Claw";
 			};
 			name = Debug;
 		};
@@ -518,14 +518,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.OliveTests;
+				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.ClawTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Olive.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Olive";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Claw.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Claw";
 			};
 			name = Release;
 		};
@@ -537,14 +537,14 @@
 				DEVELOPMENT_TEAM = CQ45U4X9K3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.OliveUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.ClawUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = Olive;
+				TEST_TARGET_NAME = Claw;
 			};
 			name = Debug;
 		};
@@ -556,21 +556,21 @@
 				DEVELOPMENT_TEAM = CQ45U4X9K3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.OliveUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = jamesRochabrun.ClawUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = Olive;
+				TEST_TARGET_NAME = Claw;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7B67B4C82E7FD5C6006A8EB2 /* Build configuration list for PBXProject "Olive" */ = {
+		7B67B4C82E7FD5C6006A8EB2 /* Build configuration list for PBXProject "Claw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B67B4EC2E7FD5C8006A8EB2 /* Debug */,
@@ -579,7 +579,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B67B4EE2E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "Olive" */ = {
+		7B67B4EE2E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "Claw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B67B4EF2E7FD5C8006A8EB2 /* Debug */,
@@ -588,7 +588,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B67B4F12E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "OliveTests" */ = {
+		7B67B4F12E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "ClawTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B67B4F22E7FD5C8006A8EB2 /* Debug */,
@@ -597,7 +597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B67B4F42E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "OliveUITests" */ = {
+		7B67B4F42E7FD5C8006A8EB2 /* Build configuration list for PBXNativeTarget "ClawUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B67B4F52E7FD5C8006A8EB2 /* Debug */,
@@ -621,8 +621,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jamesrochabrun/ClaudeCodeUI";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.5;
+				branch = "jroch-more-debug-report";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
