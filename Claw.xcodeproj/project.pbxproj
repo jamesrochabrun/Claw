@@ -621,8 +621,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jamesrochabrun/ClaudeCodeUI";
 			requirement = {
-				branch = "jroch-more-debug-report";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
