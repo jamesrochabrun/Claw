@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Claw</title>
+    <link>https://github.com/jamesrochabrun/Claw</link>
+    <description>Claw app updates</description>
+    <language>en</language>
+    <item>
+      <title>Version REPLACE_VERSION</title>
+      <link>https://github.com/jamesrochabrun/Claw</link>
+      <sparkle:version>REPLACE_VERSION</sparkle:version>
+      <sparkle:channel>stable</sparkle:channel>
+      <description><![CDATA[
+        REPLACE_DESCRIPTION
+      ]]></description>
+      <pubDate>REPLACE_PUBDATE</pubDate>
+      <enclosure
+        url="https://github.com/jamesrochabrun/Claw/releases/download/vREPLACE_VERSION/Claw-REPLACE_VERSION.zip"
+        sparkle:version="REPLACE_VERSION"
+        sparkle:edSignature="REPLACE_SIGNATURE"
+        length="REPLACE_LENGTH"
+        type="application/octet-stream" />
+    </item>
+  </channel>
+</rss>
