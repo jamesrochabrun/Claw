@@ -2,4 +2,4 @@
 
 macOS App for Claude Code
 
-<img width="1535" height="517" alt="Image" src="https://github.com/user-attachments/assets/2fcb59c8-307a-48f7-8247-ab2830863421" />
+![Image](https://github.com/user-attachments/assets/f854ceb6-9a63-464c-a6d4-499f272054bd)
