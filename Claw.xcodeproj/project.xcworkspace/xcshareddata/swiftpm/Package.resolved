@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/ClaudeCodeUI",
       "state" : {
-        "revision" : "a333d97cf0b5ef4a00db1f2acdc9be0aa5570615",
-        "version" : "1.6.2"
+        "revision" : "2fffb0b125966c3041dc099604a0c6601b8b469c",
+        "version" : "1.6.5"
       }
     },
     {
