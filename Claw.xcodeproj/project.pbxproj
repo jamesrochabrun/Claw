@@ -622,7 +622,7 @@
 			repositoryURL = "https://github.com/jamesrochabrun/ClaudeCodeUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.2;
+				minimumVersion = 1.6.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
