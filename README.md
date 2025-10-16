@@ -1,4 +1,4 @@
-# Claw
+## Claw Code
 
 macOS App for Claude Code
 
