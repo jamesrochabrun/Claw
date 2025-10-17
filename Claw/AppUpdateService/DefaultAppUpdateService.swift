@@ -5,6 +5,7 @@
 //  Default implementation of AppUpdateService
 //
 
+import Combine
 import Foundation
 import OSLog
 
@@ -12,7 +13,6 @@ private let updateLogger = Logger(subsystem: "com.claw.updates", category: "serv
 
 // MARK: - DefaultAppUpdateService
 
-@MainActor
 final class DefaultAppUpdateService: AppUpdateService {
 
   init(userDefaults: UserDefaults = .standard) {
@@ -20,17 +20,8 @@ final class DefaultAppUpdateService: AppUpdateService {
     monitorSettingChanges()
   }
 
-  var hasUpdateAvailable: AsyncStream<AppUpdateResult> {
-    AsyncStream { continuation in
-      self.continuations.append(continuation)
-      // Send current value immediately
-      continuation.yield(_currentUpdateResult)
-
-      continuation.onTermination = { [weak self] _ in
-        guard let self = self else { return }
-        self.continuations.removeAll { $0 === continuation }
-      }
-    }
+  var hasUpdateAvailable: AnyPublisher<AppUpdateResult, Never> {
+    _hasUpdateAvailable.eraseToAnyPublisher()
   }
 
   func stopCheckingForUpdates() {
@@ -83,18 +74,10 @@ final class DefaultAppUpdateService: AppUpdateService {
   private static let autoCheckSettingKey = "AppUpdateService.automaticallyCheckForUpdates"
 
   private let userDefaults: UserDefaults
+  private var cancellables = Set<AnyCancellable>()
   private let delayBetweenChecks: Duration = .seconds(60 * 60) // Check every hour
 
-  private var _currentUpdateResult: AppUpdateResult = .noUpdateAvailable {
-    didSet {
-      // Notify all continuations
-      for continuation in continuations {
-        continuation.yield(_currentUpdateResult)
-      }
-    }
-  }
-
-  private var continuations: [AsyncStream<AppUpdateResult>.Continuation] = []
+  private let _hasUpdateAvailable = CurrentValueSubject<AppUpdateResult, Never>(.noUpdateAvailable)
   private var canCheckForUpdates = false
   private var updateTask: Task<Void, Never>?
 
@@ -146,7 +129,7 @@ final class DefaultAppUpdateService: AppUpdateService {
       guard let self = self else { return }
 
       while canCheckForUpdates && !Task.isCancelled {
-        guard _currentUpdateResult == .noUpdateAvailable else {
+        guard _hasUpdateAvailable.value == .noUpdateAvailable else {
           // Stop checking if an update is already available
           updateLogger.info("Update already available, stopping periodic checks")
           break
@@ -155,7 +138,7 @@ final class DefaultAppUpdateService: AppUpdateService {
         do {
           let updater = UpdateChecker()
           let result = try await updater.checkForUpdates()
-          _currentUpdateResult = result
+          _hasUpdateAvailable.send(result)
           updateLogger.info("Update check completed: \(result == .noUpdateAvailable ? "no update" : "update available")")
         } catch {
           updateLogger.error("Update check failed: \(error.localizedDescription)")
