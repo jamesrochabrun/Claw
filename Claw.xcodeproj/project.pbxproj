@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7B67B4F92E7FD5F3006A8EB2 /* ApprovalServerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B67B4F82E7FD5F3006A8EB2 /* ApprovalServerKit */; };
 		7B67B4FC2E7FD624006A8EB2 /* ClaudeCodeCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7B67B4FB2E7FD624006A8EB2 /* ClaudeCodeCore */; };
+		7BB57D2D2EA1BB4C00927023 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 7BB57D2C2EA1BB4C00927023 /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +35,22 @@
 		7B67B4E42E7FD5C8006A8EB2 /* ClawUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClawUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7BB57D2F2EA1BF5D00927023 /* Exceptions for "Claw" folder in "Claw" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 7B67B4CC2E7FD5C6006A8EB2 /* Claw */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		7B67B4CF2E7FD5C6006A8EB2 /* Claw */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7BB57D2F2EA1BF5D00927023 /* Exceptions for "Claw" folder in "Claw" target */,
+			);
 			path = Claw;
 			sourceTree = "<group>";
 		};
@@ -57,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BB57D2D2EA1BB4C00927023 /* Sparkle in Frameworks */,
 				7B67B4FC2E7FD624006A8EB2 /* ClaudeCodeCore in Frameworks */,
 				7B67B4F92E7FD5F3006A8EB2 /* ApprovalServerKit in Frameworks */,
 			);
@@ -122,6 +137,7 @@
 			packageProductDependencies = (
 				7B67B4F82E7FD5F3006A8EB2 /* ApprovalServerKit */,
 				7B67B4FB2E7FD624006A8EB2 /* ClaudeCodeCore */,
+				7BB57D2C2EA1BB4C00927023 /* Sparkle */,
 			);
 			productName = Claw;
 			productReference = 7B67B4CD2E7FD5C6006A8EB2 /* Claw.app */;
@@ -208,6 +224,7 @@
 			packageReferences = (
 				7B67B4F72E7FD5F3006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeApprovalServer" */,
 				7B67B4FA2E7FD624006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */,
+				7BB57D2B2EA1BB4C00927023 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7B67B4CE2E7FD5C6006A8EB2 /* Products */;
@@ -437,6 +454,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Claw/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -469,6 +487,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Claw/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -625,6 +644,14 @@
 				minimumVersion = 1.6.5;
 			};
 		};
+		7BB57D2B2EA1BB4C00927023 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -637,6 +664,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7B67B4FA2E7FD624006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */;
 			productName = ClaudeCodeCore;
+		};
+		7BB57D2C2EA1BB4C00927023 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BB57D2B2EA1BB4C00927023 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

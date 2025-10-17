@@ -11,10 +11,9 @@ import Foundation
 // MARK: - AppUpdateService
 
 /// Service for checking and managing app updates
-@MainActor
 protocol AppUpdateService: Sendable {
   /// Current update availability status
-  var hasUpdateAvailable: AsyncStream<AppUpdateResult> { get }
+  var hasUpdateAvailable: AnyPublisher<AppUpdateResult, Never> { get }
 
   /// Stop checking for updates
   func stopCheckingForUpdates()

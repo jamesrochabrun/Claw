@@ -18,8 +18,8 @@ private let updateLogger = Logger(subsystem: "com.claw.updates", category: "spar
 final class BackgroundUserDriver: NSObject, SPUUserDriver, Sendable {
 
   init(
-    onReceivedUpdateInfo: @escaping @Sendable (AppUpdateInfo) -> Void = { _ in },
-    onReadyToInstall: @escaping @Sendable () -> Void = { })
+    onReceivedUpdateInfo: @escaping @MainActor @Sendable (AppUpdateInfo) -> Void = { _ in },
+    onReadyToInstall: @escaping @MainActor @Sendable () -> Void = { })
   {
     self.onReceivedUpdateInfo = onReceivedUpdateInfo
     self.onReadyToInstall = onReadyToInstall
@@ -136,6 +136,6 @@ final class BackgroundUserDriver: NSObject, SPUUserDriver, Sendable {
     completion()
   }
 
-  private let onReceivedUpdateInfo: @Sendable (AppUpdateInfo) -> Void
-  private let onReadyToInstall: @Sendable () -> Void
+  private let onReceivedUpdateInfo: @MainActor @Sendable (AppUpdateInfo) -> Void
+  private let onReadyToInstall: @MainActor @Sendable () -> Void
 }

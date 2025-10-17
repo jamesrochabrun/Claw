@@ -15,7 +15,7 @@ private let updateLogger = Logger(subsystem: "com.claw.updates", category: "chec
 
 /// A helper that checks for updates once
 @MainActor
-final class UpdateChecker: NSObject, Sendable {
+final class UpdateChecker: NSObject {
 
   override init() {
     super.init()
@@ -53,10 +53,10 @@ final class UpdateChecker: NSObject, Sendable {
     let hostBundle = Bundle.main
     let applicationBundle = Bundle.main
     let userDriver = BackgroundUserDriver(
-      onReceivedUpdateInfo: { [weak self] updateInfo in
+      onReceivedUpdateInfo: { @MainActor [weak self] updateInfo in
         self?.updateInfo = updateInfo
       },
-      onReadyToInstall: { [weak self] in
+      onReadyToInstall: { @MainActor [weak self] in
         self?.complete(with: .success(.updateAvailable(info: self?.updateInfo)))
       })
 
