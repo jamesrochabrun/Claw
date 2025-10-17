@@ -104,10 +104,8 @@ final class DefaultAppUpdateService: AppUpdateService {
   }
 
   private func monitorSettingChanges() {
-    // Start checking if enabled by default
-    if automaticallyCheckForUpdates {
-      checkForUpdatesContinuously()
-    }
+    // DON'T start automatically here - ClawApp will call checkForUpdatesContinuously()
+    // This avoids double-starting the update check
 
     // Monitor changes to the setting
     NotificationCenter.default.addObserver(
@@ -124,9 +122,17 @@ final class DefaultAppUpdateService: AppUpdateService {
   }
 
   private func startCheckingForUpdates() {
+    // Prevent multiple simultaneous update tasks
+    guard updateTask == nil else {
+      updateLogger.info("Update task already running, skipping start")
+      return
+    }
+
     updateTask?.cancel()
     updateTask = Task { @MainActor [weak self] in
       guard let self = self else { return }
+
+      updateLogger.info("Started update checking loop")
 
       while canCheckForUpdates && !Task.isCancelled {
         guard _hasUpdateAvailable.value == .noUpdateAvailable else {
@@ -136,6 +142,7 @@ final class DefaultAppUpdateService: AppUpdateService {
         }
 
         do {
+          updateLogger.info("Creating UpdateChecker and checking for updates...")
           let updater = UpdateChecker()
           let result = try await updater.checkForUpdates()
           _hasUpdateAvailable.send(result)
@@ -145,8 +152,11 @@ final class DefaultAppUpdateService: AppUpdateService {
         }
 
         // Wait before next check
+        updateLogger.info("Waiting \(delayBetweenChecks.components.seconds) seconds before next check")
         try? await Task.sleep(for: delayBetweenChecks)
       }
+
+      updateLogger.info("Update checking loop ended")
     }
   }
 }
