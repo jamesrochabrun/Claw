@@ -27,6 +27,8 @@ final class UpdateChecker: NSObject {
       throw NSError(domain: "ClawUpdateError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Update already in progress"])
     }
 
+    updateLogger.info("Starting update check...")
+
     return try await withCheckedThrowingContinuation { continuation in
       guard self.continuation == nil else {
         continuation.resume(throwing: NSError(domain: "ClawUpdateError", code: 2, userInfo: [NSLocalizedDescriptionKey: "Update already in progress"]))
@@ -38,6 +40,7 @@ final class UpdateChecker: NSObject {
       // Remove the key used by Sparkle to avoid the update being delayed / cached
       UserDefaults.standard.removeObject(forKey: "SULastCheckTime")
 
+      updateLogger.info("Calling updater.start() and checkForUpdates()")
       try? updater?.start()
       updater?.resetUpdateCycle()
       updater?.checkForUpdates()
