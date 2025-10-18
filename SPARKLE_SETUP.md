@@ -1,148 +1,34 @@
 # Sparkle Automatic Updates Setup Guide
 
-This guide explains how to set up and use automatic updates for Claw using Sparkle.
+Complete implementation of automatic updates for Claw using [Sparkle](https://sparkle-project.org/) and Fastlane.
 
 ## Overview
 
-Claw uses [Sparkle](https://sparkle-project.org/) for automatic updates. The implementation follows the architecture from the [cmd app](https://github.com/getcmd-dev/cmd) with a focus on security and user privacy.
+Claw uses Sparkle for automatic updates with a complete Fastlane-based release pipeline, following the architecture from the [cmd app](https://github.com/getcmd-dev/cmd).
 
-## Security Principles
+### Key Features
 
-### 🔐 Key Security Measures
+- Background update checking (hourly)
+- Silent downloads (no intrusive popups)
+- EdDSA signature verification
+- User privacy protected (no telemetry)
+- Automated release workflow
+- Professional code signing with Fastlane Match
 
-1. **Private Key Protection**
-   - NEVER commit the Sparkle private key to git
-   - Store securely in password manager or GitHub Secrets
-   - Used only during release builds to sign updates
-
-2. **Public Key Distribution**
-   - Public key is safe to commit (stored in Info.plist)
-   - Users need this to verify update authenticity
-   - Like a public SSH key - useless without private key
-
-3. **User Privacy**
-   - `sendSystemProfile: false` - no telemetry collected
-   - Background updates - non-intrusive
-   - User control via preferences
-
-## Initial Setup
-
-### Step 1: Add Sparkle via SPM
-
-1. Open `Claw.xcodeproj` in Xcode
-2. Go to **File → Add Packages...**
-3. Enter: `https://github.com/sparkle-project/Sparkle`
-4. Select version: "Up to Next Major Version" (recommended)
-5. Add to the **Claw** target
-6. Build the project once to download Sparkle
-
-### Step 2: Generate Signing Keys
-
-```bash
-# Run the key generation script
-./generate_sparkle_keys.sh
-```
-
-This will output two keys:
-
-```
-SUPublicEDKey: abc123xyz... (PUBLIC - safe to share)
-Private key: xyz789abc... (PRIVATE - keep secret!)
-```
-
-### Step 3: Store Keys Securely
-
-**Public Key (Info.plist):**
-1. Copy the `SUPublicEDKey` value
-2. Add to `Claw/Info.plist` or Xcode project settings
-3. This is safe to commit to git ✅
-
-**Private Key (Secret Storage):**
-
-Option A - Local Development:
-```bash
-# Save to .sparkle_private_key (already in .gitignore)
-echo 'YOUR_PRIVATE_KEY_HERE' > .sparkle_private_key
-```
-
-Option B - GitHub Actions (for CI/CD):
-1. Go to repository Settings → Secrets and variables → Actions
-2. Create new secret: `SPARKLE_PRIVATE_KEY`
-3. Paste your private key value
-4. Never print this in logs! ⚠️
-
-### Step 4: Update Info.plist
-
-Add these keys to your Info.plist:
-
-```xml
-<key>SUFeedURL</key>
-<string>https://raw.githubusercontent.com/jamesrochabrun/Claw/main/appcast.xml</string>
-
-<key>SUPublicEDKey</key>
-<string>YOUR_PUBLIC_KEY_HERE</string>
-```
-
-Or in Xcode project settings:
-- Target Claw → Info → Custom iOS Target Properties
-- Add `SUFeedURL` (String): `https://raw.githubusercontent.com/jamesrochabrun/Claw/main/appcast.xml`
-- Add `SUPublicEDKey` (String): Your public key
-
-## Release Process
-
-### Building and Signing a Release
-
-```bash
-# Set your private key (from secure storage)
-export SPARKLE_PRIVATE_KEY=$(cat .sparkle_private_key)
-
-# Build, sign, notarize, and create Sparkle update
-./build_and_notarize.sh
-```
-
-This script will:
-1. Build and code sign the app
-2. Notarize with Apple
-3. Create a ZIP for Sparkle updates
-4. Sign the ZIP with your Sparkle private key
-5. Generate `appcast.xml` with the signature
-
-### Creating a GitHub Release
-
-```bash
-# Create DMG for manual distribution
-./create_dmg.sh
-
-# Upload both files to GitHub Release:
-# - dist/Claw-1.0.X.dmg (manual download)
-# - build/Claw-1.0.X.zip (Sparkle updates)
-```
-
-### Commit the Appcast
-
-```bash
-# Commit the updated appcast.xml
-git add appcast.xml
-git commit -m "Update appcast for version 1.0.X"
-git push
-```
-
-The appcast.xml must be in your repository for updates to work!
-
-## How It Works
-
-### Architecture
+## Architecture
 
 ```
 ClawApp.swift
     ↓
-DefaultAppUpdateService (checks every hour)
+DefaultAppUpdateService (checks hourly)
     ↓
 UpdateChecker (wraps Sparkle)
     ↓
 BackgroundUserDriver (silent UI)
     ↓
 SPUUpdater (Sparkle framework)
+    ↓
+Downloads from appcast.xml → GitHub Releases
 ```
 
 ### Update Flow
@@ -150,78 +36,460 @@ SPUUpdater (Sparkle framework)
 1. App launches → `DefaultAppUpdateService` starts
 2. Every hour, checks `appcast.xml` from GitHub
 3. Compares versions → verifies EdDSA signature
-4. If update available → downloads in background
-5. User sees notification → can install on next launch
+4. If update available → downloads ZIP in background
+5. User sees notification → installs on next launch
 
 ### Files and Their Purpose
 
-- `Models.swift` - Data structures for updates
+**Swift Implementation:**
+- `Models.swift` - Data structures (`AppUpdateInfo`, `AppUpdateResult`)
 - `AppUpdateService.swift` - Protocol definition
-- `DefaultAppUpdateService.swift` - Background update logic
+- `DefaultAppUpdateService.swift` - Background checking logic
 - `UpdateChecker.swift` - Sparkle integration wrapper
 - `BackgroundUserDriver.swift` - Silent update UI (no popups)
+
+**Build & Release:**
+- `fastlane/Fastfile` - Complete automation (build, sign, notarize, release)
+- `fastlane/Appfile` - Bundle ID and team configuration
+- `Claw.xcconfig` - Version and channel configuration
+- `appcast.template.xml` - Template for update manifest
+- `appcast.xml` - Active update manifest (auto-generated)
+
+**Configuration:**
+- `Info.plist` - Sparkle public key and feed URL
+- `Gemfile` - Ruby dependencies (fastlane, xcbeautify)
+- `.ruby-version` - Ruby version lock
+
+## Security Architecture
+
+### EdDSA Key Pair (Sparkle Signing)
+
+**Private Key:**
+- Used to sign update ZIPs
+- NEVER commit to git
+- Store in keychain (local) or GitHub Secrets (CI)
+- Loaded via Fastlane helpers
+
+**Public Key:**
+- Embedded in Info.plist (SUPublicEDKey)
+- Safe to commit to git
+- Users need this to verify authenticity
+- Like SSH public key - useless without private key
+
+### Code Signing (Apple Developer ID)
+
+Managed via Fastlane Match:
+- Certificates stored in private Git repo
+- Encrypted with MATCH_PASSWORD
+- Shared across machines/CI
+- Automatic synchronization
+
+### Privacy Protection
+
+```swift
+// BackgroundUserDriver.swift
+SUUpdatePermissionResponse(
+  automaticUpdateChecks: true,
+  automaticUpdateDownloading: true,
+  sendSystemProfile: false  // ⭐ No telemetry!
+)
+```
+
+## Initial Setup
+
+### 1. Install Dependencies
+
+```bash
+# Install Bundler (if needed)
+gem install bundler
+
+# Install Fastlane and tools
+bundle install
+
+# Install create-dmg for DMG creation
+brew install create-dmg
+```
+
+### 2. Add Sparkle via SPM
+
+1. Open `Claw.xcodeproj` in Xcode
+2. File → Add Package Dependencies
+3. URL: `https://github.com/sparkle-project/Sparkle`
+4. Version: Up to Next Major (2.0.0+)
+5. Add to Claw target
+
+### 3. Generate Sparkle Keys
+
+```bash
+# Build project once to download Sparkle
+xcodebuild -scheme Claw -configuration Release
+
+# Generate EdDSA signing keys
+./generate_sparkle_keys.sh
+```
+
+Output:
+```
+SUPublicEDKey: abc123xyz... (PUBLIC - add to Info.plist)
+Private key: xyz789abc... (PRIVATE - keep secret!)
+```
+
+### 4. Configure Info.plist
+
+Add to `Claw/Info.plist`:
+
+```xml
+<key>SUFeedURL</key>
+<string>https://raw.githubusercontent.com/jamesrochabrun/Claw/main/appcast.xml</string>
+
+<key>SUPublicEDKey</key>
+<string>YOUR_PUBLIC_KEY_FROM_STEP_3</string>
+```
+
+### 5. Set Up Fastlane Match
+
+```bash
+# Create private GitHub repo for certificates
+# https://github.com/jamesrochabrun/claw-provisioning-profiles
+
+# Initialize Match
+cd fastlane
+bundle exec fastlane match developer_id --readonly false
+```
+
+Enter a strong Match password when prompted. Store it securely!
+
+### 6. Store Secrets
+
+#### Local Development
+
+```bash
+# Set secrets as environment variables
+export SPARKLE_SECRET_KEY="your_private_key_from_step_3"
+export MATCH_PASSWORD="your_match_password"
+export FASTLANE_GITHUB_ACCESS_TOKEN="ghp_your_token"
+export GH_WRITE_TOKEN="ghp_your_token"
+export NOTARY_KEY_ID="your_asc_key_id"
+export NOTARY_ISSUER_ID="your_asc_issuer"
+export NOTARY_P8="-----BEGIN PRIVATE KEY-----
+...
+-----END PRIVATE KEY-----"
+
+# Run fastlane once - it will save to keychain
+cd fastlane
+bundle exec fastlane create_and_sign_release
+```
+
+After first run, secrets are in keychain and loaded automatically.
+
+#### GitHub Actions (CI/CD)
+
+Repository Settings → Secrets and variables → Actions:
+
+Required secrets:
+- `SPARKLE_SECRET_KEY`
+- `MATCH_PASSWORD`
+- `FASTLANE_GITHUB_ACCESS_TOKEN`
+- `GH_WRITE_TOKEN`
+- `NOTARY_KEY_ID`
+- `NOTARY_ISSUER_ID`
+- `NOTARY_P8`
+
+### 7. Link Claw.xcconfig
+
+In Xcode:
+1. Project settings → Info → Configurations
+2. Set `Claw.xcconfig` for both Debug and Release
+
+Or add to Build Settings:
+```
+#include "Claw.xcconfig"
+```
+
+## Release Process
+
+### Automated Release (Recommended)
+
+```bash
+cd fastlane
+bundle exec fastlane distribute_release
+```
+
+This will:
+1. Auto-increment version if needed
+2. Build, sign, notarize
+3. Create Sparkle ZIP + DMG
+4. Update appcast.xml
+5. Upload to GitHub Releases
+6. Create PR with changes
+
+### Manual Release
+
+See [RELEASE.md](./RELEASE.md) for detailed manual process.
+
+Quick version:
+
+```bash
+# 1. Update version in Claw.xcconfig
+# APP_VERSION = 1.0.1
+
+# 2. Build and sign
+./build_and_notarize.sh
+
+# 3. Create GitHub release
+gh release create v1.0.1 \
+  build/release/Claw.dmg \
+  build/release/Claw.app.zip
+
+# 4. Commit appcast
+git add appcast.xml Claw.xcconfig
+git commit -m "Release v1.0.1"
+git push
+```
+
+## Fastlane Lanes
+
+### build_debug
+Quick debug build for testing.
+```bash
+bundle exec fastlane build_debug
+```
+
+### build_release
+Release build without signing (testing only).
+```bash
+bundle exec fastlane build_release
+```
+
+### create_and_sign_release
+Full build, sign, notarize, create Sparkle update.
+```bash
+bundle exec fastlane create_and_sign_release
+```
+
+Creates:
+- `build/release/Claw.app` (notarized)
+- `build/release/Claw.dmg` (installer)
+- `build/release/Claw.app.zip` (Sparkle update)
+- Updated `appcast.xml`
+
+### distribute_release
+Fully automated release with GitHub upload and PR.
+```bash
+bundle exec fastlane distribute_release
+```
+
+### strip_debug_symbols_and_resign
+Utility lane to reduce binary size (~40% reduction).
+```bash
+bundle exec fastlane strip_debug_symbols_and_resign \
+  app_path:build/release/Claw.app \
+  app_binary_path:build/release/Claw.app/Contents/MacOS/Claw \
+  build_path:build \
+  certificate_name:"Developer ID Application" \
+  certificate_sha1:ABC123...
+```
+
+## Configuration Files
+
+### Claw.xcconfig
+
+Version and channel management:
+
+```
+APP_VERSION = 1.0.0
+APP_DISTRIBUTION_CHANNEL = stable
+MARKETING_VERSION = $(APP_VERSION)
+CURRENT_PROJECT_VERSION = 1
+```
+
+Updated automatically by `distribute_release` lane.
+
+### appcast.template.xml
+
+Template for update manifest. Placeholders replaced by Fastlane:
+
+```xml
+<sparkle:version>REPLACE_VERSION</sparkle:version>
+<sparkle:edSignature>REPLACE_SIGNATURE</sparkle:edSignature>
+<pubDate>REPLACE_PUBDATE</pubDate>
+```
+
+### appcast.xml
+
+Active update manifest hosted on GitHub. Generated from template.
+
+Users' apps poll this URL hourly.
+
+## How Sparkle Signing Works
+
+### During Build (Fastlane)
+
+```ruby
+# After creating notarized app, create special ZIP
+sh("ditto -c -k --keepParent --sequesterRsrc #{app_path} #{app_zip_path}")
+
+# Sign with EdDSA private key
+sparkle_output = sh("echo '#{sparkle_secret_key}' | #{sparkle_path}/bin/sign_update #{app_zip_path} --ed-key-file -")
+
+# Output: "sparkle:edSignature="abc123..." length="12345678""
+```
+
+### During Update (User's App)
+
+```swift
+// 1. Download appcast.xml from GitHub
+// 2. Parse <enclosure> tag
+// 3. Verify edSignature using SUPublicEDKey from Info.plist
+// 4. If valid, download and install ZIP
+// 5. If invalid, reject update (security!)
+```
+
+This prevents malicious updates - only ZIPs signed with your private key are accepted.
+
+## Testing Updates
+
+### Local Testing
+
+1. Build version 1.0.1:
+   ```bash
+   # In Claw.xcconfig: APP_VERSION = 1.0.1
+   ./build_and_notarize.sh
+   ```
+
+2. Install and run version 1.0.0
+
+3. Host appcast locally:
+   ```bash
+   python3 -m http.server 8000
+   ```
+
+4. Update Info.plist SUFeedURL:
+   ```
+   http://localhost:8000/appcast.xml
+   ```
+
+5. App should detect update within ~1 hour (or force check)
+
+### Production Testing
+
+1. Create test release (1.0.1)
+2. Upload to GitHub Releases
+3. Push appcast.xml to main branch
+4. Run version 1.0.0
+5. Wait for update check (check Console.app logs)
+
+## Troubleshooting
+
+### Update Check Not Running
+
+Check logs in Console.app:
+```
+subsystem:com.claw.updates category:service
+```
+
+Common issues:
+- DEBUG mode (updates disabled in debug builds)
+- `automaticallyCheckForUpdates` setting is false
+- Service not initialized in ClawApp.swift
+
+### No Update Detected
+
+1. Verify appcast.xml accessible:
+   ```bash
+   curl https://raw.githubusercontent.com/jamesrochabrun/Claw/main/appcast.xml
+   ```
+
+2. Check version comparison:
+   - Current: `CFBundleVersion` in Info.plist
+   - New: `<sparkle:version>` in appcast.xml
+   - Must be higher to trigger update
+
+3. Verify signature:
+   ```bash
+   # Public key in Info.plist must match private key used to sign
+   ```
+
+### Signature Verification Failed
+
+```
+updaterError: Update signature invalid
+```
+
+Cause: Private/public key mismatch.
+
+Fix:
+1. Regenerate keys: `./generate_sparkle_keys.sh`
+2. Update SUPublicEDKey in Info.plist
+3. Re-sign update ZIP with new private key
+
+### Notarization Failed
+
+Check notarization log:
+```bash
+xcrun notarytool log <submission-id> --keychain-profile notarytool
+```
+
+Common issues:
+- Missing hardened runtime
+- Unsigned nested frameworks
+- Invalid entitlements
+
+Fix:
+```bash
+# Re-sign all components
+cd fastlane
+bundle exec fastlane strip_debug_symbols_and_resign
+```
+
+### Fastlane Match Issues
+
+```
+Could not decrypt provisioning profile
+```
+
+Fix:
+```bash
+# Verify password
+security find-generic-password -s 'com.claw.MATCH_PASSWORD' -w
+
+# Re-fetch certificates
+bundle exec fastlane match developer_id --readonly
+```
 
 ## User Settings
 
 Users can control updates via UserDefaults:
 
 ```swift
-// Enable/disable automatic checks
+// Disable automatic checks
 UserDefaults.standard.set(false, forKey: "AppUpdateService.automaticallyCheckForUpdates")
 
-// Ignored versions (user chose "skip this version")
+// Ignored versions (user clicked "Skip")
 // Stored as JSON array in UserDefaults
+UserDefaults.standard.string(forKey: "AppUpdateService.ignoredVersion")
 ```
-
-## Testing Updates
-
-### Local Testing
-
-1. Build version 1.0.2
-2. Create a test appcast.xml pointing to local ZIP
-3. Update `SUFeedURL` to point to local file
-4. Run app → should detect "update"
-
-### Production Testing
-
-1. Create a test release with incremented version
-2. Push appcast.xml to GitHub
-3. Run current version of app
-4. Wait for update check (or force check in DEBUG mode)
-
-## Troubleshooting
-
-### "No update available" but version is newer
-
-- Check that `CFBundleVersion` (build number) is incrementing
-- Verify appcast.xml is accessible at the feed URL
-- Check Sparkle logs in Console.app (search for "com.claw.updates")
-
-### "Update signature invalid"
-
-- Private key used for signing doesn't match public key in Info.plist
-- Regenerate keys and update Info.plist
-
-### Update check not running
-
-- Check DEBUG mode - updates disabled in DEBUG builds
-- Verify `automaticallyCheckForUpdates` UserDefaults setting
-- Check logs for service initialization
 
 ## Security Checklist
 
 Before each release:
 
-- [ ] Private key is NOT in source code
-- [ ] Private key is NOT in git history
-- [ ] Public key is in Info.plist
+- [ ] Private key NOT in source code
+- [ ] Private key NOT in git history
+- [ ] Public key IS in Info.plist
 - [ ] appcast.xml uses HTTPS URL
-- [ ] sendSystemProfile is false
-- [ ] ZIP is signed with correct private key
+- [ ] `sendSystemProfile` is false
+- [ ] ZIP signed with correct private key
 - [ ] Signature in appcast.xml matches ZIP
+- [ ] Match certificates valid (not expired)
+- [ ] Code signing verified
+- [ ] Notarization successful
 
 ## References
 
 - [Sparkle Documentation](https://sparkle-project.org/documentation/)
-- [cmd app implementation](https://github.com/getcmd-dev/cmd/blob/main/app/modules/services/AppUpdateService/)
-- [EdDSA Signing Guide](https://sparkle-project.org/documentation/signing/)
+- [Fastlane Documentation](https://docs.fastlane.tools/)
+- [Fastlane Match](https://docs.fastlane.tools/actions/match/)
+- [Apple Notarization](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution)
+- [cmd app reference](https://github.com/getcmd-dev/cmd)
+- [RELEASE.md](./RELEASE.md) - Complete release guide
