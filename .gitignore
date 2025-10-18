@@ -15,3 +15,11 @@ dist/
 
 # macOS
 .DS_Store
+
+# Sparkle private key (NEVER commit this!)
+.sparkle_private_key
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/test_output

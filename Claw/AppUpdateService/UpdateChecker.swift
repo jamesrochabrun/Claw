@@ -41,9 +41,16 @@ final class UpdateChecker: NSObject {
       UserDefaults.standard.removeObject(forKey: "SULastCheckTime")
 
       updateLogger.info("Calling updater.start() and checkForUpdates()")
-      try? updater?.start()
-      updater?.resetUpdateCycle()
-      updater?.checkForUpdates()
+      do {
+        try updater?.start()
+        updateLogger.info("Updater started successfully")
+        updater?.resetUpdateCycle()
+        updater?.checkForUpdates()
+      } catch {
+        updateLogger.error("Failed to start updater: \(error.localizedDescription)")
+        continuation.resume(throwing: error)
+        self.continuation = nil
+      }
     }
   }
 
@@ -92,16 +99,24 @@ extension UpdateChecker: SPUUpdaterDelegate {
     return false
   }
 
-  func updater(_: SPUUpdater, didDownloadUpdate _: SUAppcastItem) {
-    updateLogger.info("updater(_:didDownloadUpdate:)")
+  func updater(_: SPUUpdater, didDownloadUpdate item: SUAppcastItem) {
+    updateLogger.info("updater(_:didDownloadUpdate:) - version: \(item.versionString)")
   }
 
-  func updater(_: SPUUpdater, didExtractUpdate _: SUAppcastItem) {
-    updateLogger.info("updater(_:didExtractUpdate:)")
+  func updater(_: SPUUpdater, didExtractUpdate item: SUAppcastItem) {
+    updateLogger.info("updater(_:didExtractUpdate:) - version: \(item.versionString)")
   }
 
-  func updater(_: SPUUpdater, shouldProceedWithUpdate _: SUAppcastItem, updateCheck _: SPUUpdateCheck) throws {
-    updateLogger.info("updater(_:shouldProceedWithUpdate:updateCheck:)")
+  func updater(_: SPUUpdater, shouldProceedWithUpdate item: SUAppcastItem, updateCheck _: SPUUpdateCheck) throws {
+    updateLogger.info("updater(_:shouldProceedWithUpdate:updateCheck:) - version: \(item.versionString)")
+  }
+
+  func updater(_ updater: SPUUpdater, didFindValidUpdate item: SUAppcastItem) {
+    updateLogger.info("updater(_:didFindValidUpdate:) - Found valid update: \(item.versionString)")
+  }
+
+  func updater(_ updater: SPUUpdater, didAbortWithError error: Error) {
+    updateLogger.error("updater(_:didAbortWithError:) - \(error.localizedDescription)")
   }
 
   func updater(
@@ -132,10 +147,10 @@ extension UpdateChecker: SPUUpdaterDelegate {
     updateLogger.info("updaterWillRelaunchApplication(_:)")
   }
 
-  func bestValidUpdate(in appCast: SUAppcast, for _: SPUUpdater) -> SUAppcastItem? {
-    updateLogger.info("bestValidUpdate(in:for:)")
-    return appCast.items.first
-  }
+  // REMOVED: Let Sparkle use its default version comparison
+  // func bestValidUpdate(in appCast: SUAppcast, for updater: SPUUpdater) -> SUAppcastItem? {
+  //   This was preventing Sparkle from doing proper version comparison
+  // }
 
   func updaterMayCheck(forUpdates _: SPUUpdater) -> Bool {
     updateLogger.info("updaterMayCheck(forUpdates:)")

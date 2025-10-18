@@ -8,15 +8,16 @@
     <item>
       <title>Version 1.0.0</title>
       <link>https://github.com/jamesrochabrun/Claw</link>
-      <sparkle:version>1.0.0</sparkle:version>
       <sparkle:channel>stable</sparkle:channel>
       <description><![CDATA[
         Initial release of Claw with automatic updates support.
       ]]></description>
       <pubDate>Thu, 16 Oct 2025 12:00:00 +0000</pubDate>
       <enclosure
-        url="https://github.com/jamesrochabrun/Claw/releases/download/v1.0.0/Claw-1.0.0.zip"
-        sparkle:version="1.0.0"
+        url="https://github.com/jamesrochabrun/Claw/releases/download/v1.0.0/Claw.app.zip"
+        sparkle:version="1"
+        sparkle:shortVersionString="1.0.0"
+        sparkle:edSignature="REPLACE_SIGNATURE"
         length="0"
         type="application/octet-stream" />
     </item>
