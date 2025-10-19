@@ -198,6 +198,10 @@ platform :mac do
 
     sparkle_output = sh("echo '#{sparkle_secret_key}' | #{sparkle_path}/bin/sign_update #{app_zip_path} --ed-key-file -")
 
+    # Parse signature from output: sparkle:edSignature="SIGNATURE" length="SIZE"
+    signature_match = sparkle_output.match(/sparkle:edSignature="([^"]+)"/)
+    ed_signature = signature_match ? signature_match[1] : ""
+
     # Get version from xcconfig
     xcconfig_path = File.absolute_path("../Claw.xcconfig")
     version ||= sh("cat #{xcconfig_path} | grep APP_VERSION=").split("APP_VERSION = ").last.strip
@@ -216,7 +220,7 @@ platform :mac do
     appcast_content.gsub!("REPLACE_VERSION", version)
     appcast_content.gsub!("REPLACE_DESCRIPTION", "Release version #{version}")
     appcast_content.gsub!("REPLACE_PUBDATE", current_date)
-    appcast_content.gsub!("REPLACE_SIGNATURE", sparkle_output.strip)
+    appcast_content.gsub!("REPLACE_SIGNATURE", ed_signature)
     appcast_content.gsub!("REPLACE_LENGTH", zip_size.to_s)
 
     File.write(appcast_path, appcast_content)
