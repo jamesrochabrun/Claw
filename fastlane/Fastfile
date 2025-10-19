@@ -269,7 +269,7 @@ platform :mac do
     # Create PR with changes
     current_branch = sh("git rev-parse --abbrev-ref HEAD").strip
     new_branch_name = "release-v#{version}"
-    sh("git add ../..  && git commit -m 'Release v#{version}' --no-verify && git checkout -b #{new_branch_name} && git push origin #{new_branch_name} --no-verify")
+    sh("git add ../appcast.xml ../Claw.xcconfig && git commit -m 'Release v#{version}' --no-verify && git checkout -b #{new_branch_name} && git push origin #{new_branch_name} --no-verify")
 
     create_pull_request(
       api_token: gh_token,
