@@ -232,7 +232,7 @@ platform :mac do
     xcconfig_path = File.absolute_path("../Claw.xcconfig")
     sh("sed -i '' 's/APP_DISTRIBUTION_CHANNEL = .*/APP_DISTRIBUTION_CHANNEL = stable/' #{xcconfig_path}")
 
-    original_version = sh("cat #{xcconfig_path} | grep APP_VERSION =").split("APP_VERSION = ").last.strip
+    original_version = sh("grep 'APP_VERSION =' #{xcconfig_path}").split("APP_VERSION = ").last.strip
     version = find_available_version(original_version)
 
     # Update version if changed
