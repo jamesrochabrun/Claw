@@ -1,0 +1,74 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 1.0.1)'
+        required: false
+
+jobs:
+  release:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          brew install create-dmg
+          bundle install
+
+      - name: Configure secrets
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_GITHUB_ACCESS_TOKEN: ${{ secrets.FASTLANE_GITHUB_ACCESS_TOKEN }}
+          GH_WRITE_TOKEN: ${{ secrets.GH_WRITE_TOKEN }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+          NOTARY_P8: ${{ secrets.NOTARY_P8 }}
+          SPARKLE_SECRET_KEY: ${{ secrets.SPARKLE_SECRET_KEY }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          CERTIFICATE_SHA1: ${{ secrets.CERTIFICATE_SHA1 }}
+        run: |
+          # Store secrets in keychain-like fashion for Fastlane
+          echo "Secrets configured"
+
+      - name: Run Fastlane distribute_release
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_GITHUB_ACCESS_TOKEN: ${{ secrets.FASTLANE_GITHUB_ACCESS_TOKEN }}
+          GH_WRITE_TOKEN: ${{ secrets.GH_WRITE_TOKEN }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+          NOTARY_P8: ${{ secrets.NOTARY_P8 }}
+          SPARKLE_SECRET_KEY: ${{ secrets.SPARKLE_SECRET_KEY }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          CERTIFICATE_SHA1: ${{ secrets.CERTIFICATE_SHA1 }}
+          CI: true
+        run: |
+          cd fastlane
+          bundle exec fastlane distribute_release
+
+      - name: Upload build artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            build/release/Claw.app.zip
+            build/release/Claw.dmg
+            appcast.xml
+          retention-days: 30

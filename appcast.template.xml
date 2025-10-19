@@ -15,7 +15,7 @@
       ]]></description>
       <pubDate>REPLACE_PUBDATE</pubDate>
       <enclosure
-        url="https://github.com/jamesrochabrun/Claw/releases/download/vREPLACE_VERSION/Claw-REPLACE_VERSION.zip"
+        url="https://github.com/jamesrochabrun/Claw/releases/download/vREPLACE_VERSION/Claw.app.zip"
         sparkle:version="REPLACE_VERSION"
         sparkle:edSignature="REPLACE_SIGNATURE"
         length="REPLACE_LENGTH"

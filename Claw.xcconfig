@@ -1,0 +1,12 @@
+// Claw Version Configuration
+// This file contains the app version and distribution channel
+// Automatically updated during release process
+
+APP_VERSION = 1.0.0
+APP_DISTRIBUTION_CHANNEL = stable
+
+// Marketing version visible to users
+MARKETING_VERSION = $(APP_VERSION)
+
+// Build number (should increment with each build)
+CURRENT_PROJECT_VERSION = 1
