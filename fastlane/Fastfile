@@ -27,7 +27,7 @@ def load_secret(env_key)
   encoded = %x(security find-generic-password -s 'com.claw.#{env_key}' -w 2>/dev/null).strip
   return if encoded.empty?
 
-  decoded = Base64.decode64(encoded)
+  decoded = Base64.decode64(encoded).strip
   ENV[env_key] = decoded
 end
 
