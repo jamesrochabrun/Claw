@@ -180,7 +180,8 @@ platform :mac do
 
     # Create DMG
     dmg_path = "#{build_path}/release/#{app_name}.dmg"
-    sh("create-dmg --volname '#{app_name}' --codesign '#{certificate_name}' --overwrite '#{dmg_path}' '#{app_path}'")
+    sh("rm -f '#{dmg_path}'") if File.exist?(dmg_path)
+    sh("create-dmg --volname '#{app_name}' --codesign '#{certificate_name}' '#{dmg_path}' '#{app_path}'")
 
     # Verify signatures
     puts "Verifying code signature..."
