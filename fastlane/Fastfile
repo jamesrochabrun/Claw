@@ -158,16 +158,18 @@ platform :mac do
       certificate_sha1: certificate_sha1
     )
 
-    # Notarize
-    notarize(
-      package: app_path,
-      api_key_path: File.expand_path("~/private_keys/AuthKey_YOUR_KEY_ID.p8"),
-      api_key: load_secret("NOTARY_KEY_ID"),
-      api_issuer: load_secret("NOTARY_ISSUER_ID"),
-      verbose: false,
-      print_log: true,
-      use_notarytool: true,
-    )
+    # Notarize using xcrun notarytool directly
+    key_id = load_secret("NOTARY_KEY_ID")
+    issuer_id = load_secret("NOTARY_ISSUER_ID")
+    key_path = File.expand_path("~/private_keys/AuthKey_YOUR_KEY_ID.p8")
+
+    UI.message("Starting notarization...")
+    sh("xcrun notarytool submit '#{app_path}' --key '#{key_path}' --key-id '#{key_id}' --issuer '#{issuer_id}' --wait")
+    UI.success("Notarization complete!")
+
+    # Staple the notarization ticket
+    UI.message("Stapling notarization ticket...")
+    sh("xcrun stapler staple '#{app_path}'")
 
     # Create DMG
     dmg_path = "#{build_path}/release/#{app_name}.dmg"
