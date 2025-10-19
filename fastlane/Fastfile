@@ -180,8 +180,7 @@ platform :mac do
 
     # Create DMG
     dmg_path = "#{build_path}/release/#{app_name}.dmg"
-    sh("cd #{build_path}/release && create-dmg '#{app_name}.app' --identity #{certificate_sha1} --no-version-in-filename --overwrite")
-    sh("cd #{build_path}/release && mv #{app_name}.dmg #{app_name}.dmg 2>/dev/null || true")
+    sh("create-dmg --volname '#{app_name}' --codesign '#{certificate_name}' --overwrite '#{dmg_path}' '#{app_path}'")
 
     # Verify signatures
     puts "Verifying code signature..."
