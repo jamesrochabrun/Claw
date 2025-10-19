@@ -7,7 +7,9 @@ require "base64"
 
 # Execute a shell command silently
 def silent_sh(command)
-  Actions.sh_control_output(command, print_command: false, print_command_output: false)
+  sh(command, log: false)
+rescue
+  ""
 end
 
 # Load a secret from environment variable or keychain
@@ -113,33 +115,18 @@ platform :mac do
 
     # Load secrets
     personal_github_access_token = load_secret("FASTLANE_GITHUB_ACCESS_TOKEN")
-    ENV["MATCH_PASSWORD"] = load_secret("MATCH_PASSWORD")
 
-    # Use GitHub token for Match if available, otherwise SSH
-    readonly = true
-    git_url = readonly ? "https://jamesrochabrun:#{personal_github_access_token}@github.com/jamesrochabrun/claw-provisioning-profiles.git" : "git@github.com:jamesrochabrun/claw-provisioning-profiles.git"
-
-    match(
-      type: "developer_id",
-      team_id: "CQ45U4X9K3",
-      readonly: readonly,
-      git_url: git_url,
-    )
-
+    # Skip Match - use existing local certificate
+    # Certificate already installed: Developer ID Application: James Rochabrun (CQ45U4X9K3)
     update_code_signing_settings(
       code_sign_identity: "Developer ID Application",
       use_automatic_signing: false,
       path: "./Claw.xcodeproj",
     )
 
-    certificate_name = ENV["sigh_jamesRochabrun.Claw_developer_id_macos_certificate-name"]
-    provisioning_profile_path = ENV["sigh_jamesRochabrun.Claw_developer_id_macos_profile-path"]
-
-    # Get certificate SHA1
-    certificate_sha1 = sh("security cms -D -i '#{provisioning_profile_path}' | plutil -extract DeveloperCertificates.0 raw -o - - | base64 -D | openssl x509 -inform DER -noout -fingerprint -sha1  | cut -d= -f2 | sed 's/://g'").strip
-    if certificate_sha1.empty?
-      raise "Could not get certificate SHA1 from provisioning profile"
-    end
+    # Use existing certificate
+    certificate_name = "Developer ID Application"
+    certificate_sha1 = "636083A17270D3E5FBBBFB0CAA092C75F8C9926D"
 
     app_name = "Claw"
     app_path = "#{build_path}/release/#{app_name}.app"
@@ -186,8 +173,8 @@ platform :mac do
 
     # Create DMG
     dmg_path = "#{build_path}/release/#{app_name}.dmg"
-    sh("create-dmg '#{app_path}' --identity #{certificate_sha1} --no-version-in-filename --overwrite")
-    sh("mv Claw.dmg #{dmg_path}")
+    sh("cd #{build_path}/release && create-dmg '#{app_name}.app' --identity #{certificate_sha1} --no-version-in-filename --overwrite")
+    sh("cd #{build_path}/release && mv #{app_name}.dmg #{app_name}.dmg 2>/dev/null || true")
 
     # Verify signatures
     puts "Verifying code signature..."
@@ -326,10 +313,29 @@ platform :mac do
 
     # Find signable components (deepest first)
     all_components = []
+
+    # Find bundles and frameworks
     Dir.glob("#{app_path}/**/*.{framework,appex,bundle,xpc,app}").each do |component|
       next if component == app_path
       depth = component.split("/").length
       all_components << { path: component, depth: depth }
+    end
+
+    # Find standalone binaries (like ApprovalMCPServer)
+    Dir.glob("#{app_path}/**/*").each do |file|
+      next unless File.file?(file) && !File.symlink?(file)
+      next if file.end_with?('.framework', '.appex', '.bundle', '.xpc', '.app')
+
+      file_type = begin
+        silent_sh("file -b '#{file}'")
+      rescue
+        ""
+      end
+
+      if file_type.include?("Mach-O") && !file_type.include?("dSYM")
+        depth = file.split("/").length
+        all_components << { path: file, depth: depth }
+      end
     end
 
     # Sort by depth (deepest first)

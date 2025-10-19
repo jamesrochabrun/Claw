@@ -58,11 +58,15 @@
 		};
 		7B67B4DD2E7FD5C8006A8EB2 /* ClawTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = ClawTests;
 			sourceTree = "<group>";
 		};
 		7B67B4E72E7FD5C8006A8EB2 /* ClawUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = ClawUITests;
 			sourceTree = "<group>";
 		};
@@ -163,8 +167,6 @@
 				7B67B4DD2E7FD5C8006A8EB2 /* ClawTests */,
 			);
 			name = ClawTests;
-			packageProductDependencies = (
-			);
 			productName = ClawTests;
 			productReference = 7B67B4DA2E7FD5C8006A8EB2 /* ClawTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -186,8 +188,6 @@
 				7B67B4E72E7FD5C8006A8EB2 /* ClawUITests */,
 			);
 			name = ClawUITests;
-			packageProductDependencies = (
-			);
 			productName = ClawUITests;
 			productReference = 7B67B4E42E7FD5C8006A8EB2 /* ClawUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -451,7 +451,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CQ45U4X9K3;
@@ -484,7 +485,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Claw/Claw.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CQ45U4X9K3;
@@ -514,7 +516,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CQ45U4X9K3;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -535,7 +538,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CQ45U4X9K3;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -555,7 +559,8 @@
 		7B67B4F52E7FD5C8006A8EB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CQ45U4X9K3;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -574,7 +579,8 @@
 		7B67B4F62E7FD5C8006A8EB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CQ45U4X9K3;
 				GENERATE_INFOPLIST_FILE = YES;

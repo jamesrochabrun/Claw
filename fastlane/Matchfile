@@ -1,0 +1,11 @@
+git_url("https://github.com/jamesrochabrun/Claw-certificates.git")
+
+storage_mode("git")
+
+type("developer_id") # The default type, can be: appstore, adhoc, enterprise or developer_id
+
+app_identifier(["jamesRochabrun.Claw"])
+team_id("CQ45U4X9K3")
+
+# Git authentication via environment variable
+# FASTLANE_GITHUB_ACCESS_TOKEN is loaded from keychain via load_secret() in Fastfile
