@@ -158,16 +158,23 @@ platform :mac do
       certificate_sha1: certificate_sha1
     )
 
-    # Notarize using xcrun notarytool directly
+    # Create ZIP for notarization
+    notarization_zip = "#{build_path}/release/#{app_name}_notarization.zip"
+    sh("ditto -c -k --keepParent --sequesterRsrc '#{app_path}' '#{notarization_zip}'")
+
+    # Notarize the ZIP
     key_id = load_secret("NOTARY_KEY_ID")
     issuer_id = load_secret("NOTARY_ISSUER_ID")
     key_path = File.expand_path("~/private_keys/AuthKey_YOUR_KEY_ID.p8")
 
     UI.message("Starting notarization...")
-    sh("xcrun notarytool submit '#{app_path}' --key '#{key_path}' --key-id '#{key_id}' --issuer '#{issuer_id}' --wait")
+    sh("xcrun notarytool submit '#{notarization_zip}' --key '#{key_path}' --key-id '#{key_id}' --issuer '#{issuer_id}' --wait")
     UI.success("Notarization complete!")
 
-    # Staple the notarization ticket
+    # Remove temporary notarization ZIP
+    sh("rm '#{notarization_zip}'")
+
+    # Staple the notarization ticket to the app
     UI.message("Stapling notarization ticket...")
     sh("xcrun stapler staple '#{app_path}'")
 
