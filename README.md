@@ -8,8 +8,12 @@ https://github.com/user-attachments/assets/684d66d4-fc3f-46c7-abc7-8031c978aa15
 
 ## Xcode Integration
 
-https://github.com/user-attachments/assets/286e42a8-129a-4335-bc8c-34df719eed87
+https://github.com/user-attachments/assets/28a42409-bfa0-48b2-8f2a-2728d7a5afd0
 
 ## Plan Mode
 
 https://github.com/user-attachments/assets/bd96c97b-f9e1-443a-be74-cf4b11ba0b69
+
+## Manage tools and MCP
+
+https://github.com/user-attachments/assets/bc70ba23-a922-42a0-a875-c4914b4412e1
