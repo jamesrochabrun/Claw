@@ -126,7 +126,7 @@ platform :mac do
 
     # Use existing certificate
     certificate_name = "Developer ID Application"
-    certificate_sha1 = "YOUR_CERTIFICATE_SHA1"
+    certificate_sha1 = load_secret("CERTIFICATE_SHA1")
 
     app_name = "Claw"
     app_path = "#{build_path}/release/#{app_name}.app"
@@ -165,7 +165,7 @@ platform :mac do
     # Notarize the ZIP
     key_id = load_secret("NOTARY_KEY_ID")
     issuer_id = load_secret("NOTARY_ISSUER_ID")
-    key_path = File.expand_path("~/private_keys/AuthKey_YOUR_KEY_ID.p8")
+    key_path = File.expand_path("~/private_keys/AuthKey_#{key_id}.p8")
 
     UI.message("Starting notarization...")
     sh("xcrun notarytool submit '#{notarization_zip}' --key '#{key_path}' --key-id '#{key_id}' --issuer '#{issuer_id}' --wait")

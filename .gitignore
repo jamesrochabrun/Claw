@@ -19,7 +19,30 @@ dist/
 # Sparkle private key (NEVER commit this!)
 .sparkle_private_key
 
+# Apple Notarization Keys (NEVER commit these!)
+*.p8
+private_keys/
+AuthKey_*.p8
+
+# Local secrets and configuration
+.env
+.env.local
+secrets/
+*.secret
+
 # Fastlane
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/test_output
+fastlane/.env
+
+# Code signing certificates (use Fastlane Match instead)
+*.cer
+*.p12
+*.mobileprovision
+*.provisionprofile
+
+# Git history cleanup files
+.git-secrets-to-remove.txt
+.git-filter-repo-expressions.txt
+clean_git_history.sh

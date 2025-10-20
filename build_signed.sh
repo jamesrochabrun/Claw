@@ -5,8 +5,21 @@ set -e
 
 APP_NAME="Claw"
 SCHEME="Claw"
-TEAM_ID="YOUR_TEAM_ID"
-IDENTITY="Developer ID Application: James Rochabrun (YOUR_TEAM_ID)"
+
+# Load Team ID from environment or xcconfig
+if [ -z "$APPLE_TEAM_ID" ]; then
+  echo "Loading APPLE_TEAM_ID from Claw.xcconfig..."
+  TEAM_ID=$(grep "DEVELOPMENT_TEAM =" Claw.xcconfig | cut -d '=' -f 2 | tr -d ' ')
+else
+  TEAM_ID="$APPLE_TEAM_ID"
+fi
+
+if [ -z "$TEAM_ID" ]; then
+  echo "❌ Error: APPLE_TEAM_ID not set in environment or Claw.xcconfig"
+  exit 1
+fi
+
+IDENTITY="Developer ID Application"
 
 echo "🔨 Building ${APP_NAME} for distribution..."
 

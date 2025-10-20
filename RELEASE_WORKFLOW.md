@@ -200,7 +200,7 @@ Automatic PR with:
 # Check your certificate
 security find-identity -v -p codesigning
 
-# Should see: Developer ID Application: James Rochabrun (YOUR_TEAM_ID)
+# Should see: Developer ID Application: Your Name (YOUR_TEAM_ID)
 ```
 
 **Error: "ApprovalMCPServer signature invalid"**
