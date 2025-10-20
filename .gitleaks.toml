@@ -1,0 +1,104 @@
+# Gitleaks configuration for Claw project
+# Prevents accidental commit of secrets and credentials
+
+title = "Gitleaks config for Claw"
+
+[extend]
+useDefault = true
+
+# Custom rules for Claw-specific secrets
+[[rules]]
+id = "sparkle-private-key"
+description = "Sparkle EdDSA private key (base64 encoded)"
+regex = '''(?i)(sparkle.{0,20}(private|secret).{0,20}key.{0,20}[=:]\s*["']?[A-Za-z0-9+/]{43}=["']?)'''
+tags = ["key", "sparkle"]
+
+[[rules]]
+id = "apple-team-id"
+description = "Apple Developer Team ID"
+regex = '''(?i)(team.{0,20}id|DEVELOPMENT_TEAM).{0,20}[=:]\s*["']?[A-Z0-9]{10}["']?'''
+tags = ["apple", "team-id"]
+
+[[rules]]
+id = "notary-key-id"
+description = "Apple Notary Key ID"
+regex = '''(?i)(notary.{0,20}key.{0,20}id|NOTARY_KEY_ID).{0,20}[=:]\s*["']?[A-Z0-9]{10}["']?'''
+tags = ["apple", "notary"]
+
+[[rules]]
+id = "notary-issuer-id"
+description = "Apple Notary Issuer ID (UUID)"
+regex = '''(?i)(notary.{0,20}issuer|NOTARY_ISSUER_ID).{0,20}[=:]\s*["']?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}["']?'''
+tags = ["apple", "notary"]
+
+[[rules]]
+id = "certificate-sha1"
+description = "Code signing certificate SHA1 hash"
+regex = '''(?i)(certificate.{0,20}sha|CERTIFICATE_SHA1).{0,20}[=:]\s*["']?[A-F0-9]{40}["']?'''
+tags = ["certificate", "apple"]
+
+[[rules]]
+id = "p8-private-key"
+description = "Apple .p8 private key content"
+regex = '''-----BEGIN PRIVATE KEY-----[\s\S]*?-----END PRIVATE KEY-----'''
+tags = ["apple", "private-key"]
+
+[[rules]]
+id = "base64-key-suspicious"
+description = "Suspicious base64 encoded key (very long base64 strings)"
+regex = '''[A-Za-z0-9+/]{64,}={0,2}'''
+tags = ["key", "base64"]
+[rules.allowlist]
+regexes = [
+	# Allow the legitimate public key in Info.plist (exactly 44 chars)
+	'''<key>SUPublicEDKey</key>\s*<string>[A-Za-z0-9+/]{43}=</string>''',
+]
+
+# Allowlist for legitimate uses
+[allowlist]
+description = "Allowlist for legitimate public values"
+paths = [
+	# Don't scan build artifacts
+	'''build/.*''',
+	'''DerivedData/.*''',
+	'''\.build/.*''',
+	'''.*\.xcworkspace''',
+	'''.*\.xcuserdata''',
+]
+
+regexes = [
+	# Allow DEVELOPMENT_TEAM in xcconfig (it's needed and semi-public)
+	'''DEVELOPMENT_TEAM\s*=\s*[A-Z0-9]{10}''',
+
+	# Allow SUPublicEDKey in Info.plist (public key, not private)
+	'''SUPublicEDKey.*<string>[A-Za-z0-9+/]{43}=</string>''',
+
+	# Allow appcast.xml references (public URLs)
+	'''raw\.githubusercontent\.com''',
+
+	# Allow example/placeholder values in documentation
+	'''YOUR_TEAM_ID''',
+	'''YOUR_KEY_ID''',
+	'''YOUR_ISSUER_ID''',
+	'''YOUR_CERTIFICATE_SHA1''',
+	'''SPARKLE_PUBLIC_KEY_PLACEHOLDER''',
+]
+
+# Files to always scan
+[[rules]]
+id = "sparkle-private-key-file"
+description = "Sparkle private key file should never be committed"
+path = '''\.sparkle_private_key$'''
+tags = ["sparkle", "private"]
+
+[[rules]]
+id = "p8-file"
+description = "Apple .p8 key files should never be committed"
+path = '''\.p8$'''
+tags = ["apple", "private"]
+
+[[rules]]
+id = "env-file"
+description = "Environment files with secrets"
+path = '''\.env(\.local)?$'''
+tags = ["env", "secrets"]
