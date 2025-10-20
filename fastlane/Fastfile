@@ -148,15 +148,17 @@ platform :mac do
       xcodebuild_formatter: "xcbeautify --quiet",
     )
 
-    # Strip debug symbols and resign
-    app_binary_path = "#{app_path}/Contents/MacOS/Claw"
-    strip_debug_symbols_and_resign(
-      app_path: app_path,
-      app_binary_path: app_binary_path,
-      build_path: build_path,
-      certificate_name: certificate_name,
-      certificate_sha1: certificate_sha1
-    )
+    # Debug symbol stripping disabled - keeping symbols for better crash reports
+    # Modern best practice: Xcode extracts symbols to .dSYM files automatically
+    # Stripping was causing notarization failures due to invalid signatures after re-signing
+    # app_binary_path = "#{app_path}/Contents/MacOS/Claw"
+    # strip_debug_symbols_and_resign(
+    #   app_path: app_path,
+    #   app_binary_path: app_binary_path,
+    #   build_path: build_path,
+    #   certificate_name: certificate_name,
+    #   certificate_sha1: certificate_sha1
+    # )
 
     # Create ZIP for notarization
     notarization_zip = "#{build_path}/release/#{app_name}_notarization.zip"
@@ -228,7 +230,6 @@ platform :mac do
     {
       version: version,
       app_zip_path: app_zip_path,
-      app_binary_path: app_binary_path,
       build_path: build_path,
       dmg_path: dmg_path,
       archive_path: archive_path
