@@ -7,7 +7,7 @@ APP_DISTRIBUTION_CHANNEL = stable
 
 // Development Team ID (set this to your Apple Developer Team ID)
 // You can find this at https://developer.apple.com/account (Membership > Team ID)
-DEVELOPMENT_TEAM = YOUR_TEAM_ID
+DEVELOPMENT_TEAM = CQ45U4X9K3
 
 // Marketing version visible to users
 MARKETING_VERSION = $(APP_VERSION)
