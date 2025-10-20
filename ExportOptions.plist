@@ -9,7 +9,7 @@
 	<key>signingStyle</key>
 	<string>automatic</string>
 	<key>teamID</key>
-	<string>CQ45U4X9K3</string>
+	<string>$(DEVELOPMENT_TEAM)</string>
 	<key>signingCertificate</key>
 	<string>Developer ID Application</string>
 	<key>provisioningProfiles</key>

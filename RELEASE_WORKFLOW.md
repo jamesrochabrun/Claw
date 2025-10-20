@@ -200,7 +200,7 @@ Automatic PR with:
 # Check your certificate
 security find-identity -v -p codesigning
 
-# Should see: Developer ID Application: James Rochabrun (CQ45U4X9K3)
+# Should see: Developer ID Application: Your Name (YOUR_TEAM_ID)
 ```
 
 **Error: "ApprovalMCPServer signature invalid"**
@@ -212,9 +212,9 @@ security find-identity -v -p codesigning
 ```bash
 # Get submission ID from Fastlane output
 xcrun notarytool log <SUBMISSION_ID> \
-  --key ~/private_keys/AuthKey_8TMY75VN79.p8 \
-  --key-id 8TMY75VN79 \
-  --issuer 69a6de98-2117-47e3-e053-5b8c7c11a4d1
+  --key ~/private_keys/AuthKey_YOUR_KEY_ID.p8 \
+  --key-id YOUR_KEY_ID \
+  --issuer YOUR_ISSUER_ID
 ```
 
 **Common issues:**

@@ -75,14 +75,15 @@ security find-generic-password -s 'com.claw.GH_WRITE_TOKEN' -w | base64 -D
 
 **What it is:** App Store Connect API Key ID for notarization
 
-**Value:**
-```
-8TMY75VN79
-```
+**How to get the value:**
+
+1. Go to: https://appstoreconnect.apple.com/access/api
+2. Click on your API key
+3. Copy the "Key ID" (10 characters)
 
 **Steps:**
 - Name: `NOTARY_KEY_ID`
-- Secret: `8TMY75VN79`
+- Secret: Paste your Key ID from App Store Connect
 - Click "Add secret"
 
 ---
@@ -91,14 +92,15 @@ security find-generic-password -s 'com.claw.GH_WRITE_TOKEN' -w | base64 -D
 
 **What it is:** App Store Connect Issuer ID for notarization
 
-**Value:**
-```
-69a6de98-2117-47e3-e053-5b8c7c11a4d1
-```
+**How to get the value:**
+
+1. Go to: https://appstoreconnect.apple.com/access/api
+2. Find "Issuer ID" at the top of the page
+3. Copy the UUID (format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
 
 **Steps:**
 - Name: `NOTARY_ISSUER_ID`
-- Secret: Paste the UUID above
+- Secret: Paste your Issuer ID from App Store Connect
 - Click "Add secret"
 
 ---
@@ -109,9 +111,9 @@ security find-generic-password -s 'com.claw.GH_WRITE_TOKEN' -w | base64 -D
 
 **How to get the value:**
 
-Run this command in Terminal:
+Run this command in Terminal (replace YOUR_KEY_ID with your actual Key ID):
 ```bash
-cat ~/private_keys/AuthKey_8TMY75VN79.p8 | base64
+cat ~/private_keys/AuthKey_YOUR_KEY_ID.p8 | base64
 ```
 
 Copy the output (it will be a long base64 string).
@@ -157,14 +159,15 @@ security find-generic-password -s 'com.claw.SPARKLE_SECRET_KEY' -w | base64 -D
 
 **What it is:** Your Apple Developer Team ID
 
-**Value:**
-```
-CQ45U4X9K3
-```
+**How to get the value:**
+
+1. Go to: https://developer.apple.com/account
+2. Click "Membership" in the sidebar
+3. Find your "Team ID" (10 characters)
 
 **Steps:**
 - Name: `APPLE_TEAM_ID`
-- Secret: `CQ45U4X9K3`
+- Secret: Paste your Team ID from Apple Developer
 - Click "Add secret"
 
 ---
@@ -173,14 +176,18 @@ CQ45U4X9K3
 
 **What it is:** SHA1 fingerprint of your Developer ID certificate
 
-**Value:**
+**How to get the value:**
+
+Run this command in Terminal:
+```bash
+security find-identity -v -p codesigning | grep "Developer ID Application"
 ```
-636083A17270D3E5FBBBFB0CAA092C75F8C9926D
-```
+
+Copy the 40-character SHA1 hash (first value in parentheses).
 
 **Steps:**
 - Name: `CERTIFICATE_SHA1`
-- Secret: Paste the hash above
+- Secret: Paste your certificate SHA1 hash
 - Click "Add secret"
 
 ---
