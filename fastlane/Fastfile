@@ -2,21 +2,17 @@
 
 default_platform(:mac)
 
-# Load secrets from environment or keychain
 require "base64"
 
-# Execute a shell command silently
 def silent_sh(command)
   sh(command, log: false)
 rescue
   ""
 end
 
-# Load a secret from environment variable or keychain
 def load_secret(env_key)
   if ENV[env_key]
     unless ENV["CI"]
-      # Store in keychain for future use (locally)
       puts "Writing secret to keychain: #{env_key}"
       sh("security add-generic-password -a '#{ENV["USER"]}' -s 'com.claw.#{env_key}' -w '#{Base64.strict_encode64(ENV[env_key])}' -U")
     end
@@ -31,7 +27,6 @@ def load_secret(env_key)
   ENV[env_key] = decoded
 end
 
-# Find available version that doesn't conflict
 def find_available_version(initial_version)
   version = initial_version
 
@@ -39,7 +34,6 @@ def find_available_version(initial_version)
     existing_tag = silent_sh("git ls-remote origin refs/tags/v#{version}").strip
     existing_branch = silent_sh("git ls-remote origin refs/heads/release-v#{version}").strip
 
-    # Check if GitHub release exists
     existing_release = begin
       http_status = silent_sh("curl -o /dev/null -s -w '%{http_code}' https://github.com/jamesrochabrun/Claw/releases/tag/v#{version}").strip
       http_status == "200"
@@ -83,7 +77,6 @@ platform :mac do
 
     build_path = File.absolute_path("../build")
 
-    # Resolve package dependencies
     sh("xcodebuild -resolvePackageDependencies -scheme Claw -project ../Claw.xcodeproj -configuration Release -derivedDataPath #{build_path}/derived_data -parallelizeTargets")
 
     build_mac_app(
@@ -108,23 +101,18 @@ platform :mac do
     build_path = File.absolute_path("../build")
     sh("rm -rf #{build_path}")
 
-    # Resolve package dependencies
     sh("xcodebuild -resolvePackageDependencies -scheme Claw -project ../Claw.xcodeproj -configuration Release -derivedDataPath #{build_path}/derived_data -parallelizeTargets")
 
     version = options.fetch(:version, nil)
 
-    # Load secrets
     personal_github_access_token = load_secret("FASTLANE_GITHUB_ACCESS_TOKEN")
 
-    # Skip Match - use existing local certificate
-    # Certificate already installed: Developer ID Application: James Rochabrun (YOUR_TEAM_ID)
     update_code_signing_settings(
       code_sign_identity: "Developer ID Application",
       use_automatic_signing: false,
       path: "./Claw.xcodeproj",
     )
 
-    # Use existing certificate
     certificate_name = "Developer ID Application"
     certificate_sha1 = load_secret("CERTIFICATE_SHA1")
 
@@ -132,7 +120,6 @@ platform :mac do
     app_path = "#{build_path}/release/#{app_name}.app"
     archive_path = "#{build_path}/release/#{app_name}.xcarchive"
 
-    # Build and archive
     build_mac_app(
       destination: "platform=macOS,arch=arm64",
       skip_package_dependencies_resolution: true,
@@ -148,7 +135,6 @@ platform :mac do
       xcodebuild_formatter: "xcbeautify --quiet",
     )
 
-    # Strip debug symbols and resign
     app_binary_path = "#{app_path}/Contents/MacOS/Claw"
     strip_debug_symbols_and_resign(
       app_path: app_path,
@@ -158,11 +144,9 @@ platform :mac do
       certificate_sha1: certificate_sha1
     )
 
-    # Create ZIP for notarization
     notarization_zip = "#{build_path}/release/#{app_name}_notarization.zip"
     sh("ditto -c -k --keepParent --sequesterRsrc '#{app_path}' '#{notarization_zip}'")
 
-    # Notarize the ZIP
     key_id = load_secret("NOTARY_KEY_ID")
     issuer_id = load_secret("NOTARY_ISSUER_ID")
     key_path = File.expand_path("~/private_keys/AuthKey_#{key_id}.p8")
@@ -171,25 +155,20 @@ platform :mac do
     sh("xcrun notarytool submit '#{notarization_zip}' --key '#{key_path}' --key-id '#{key_id}' --issuer '#{issuer_id}' --wait")
     UI.success("Notarization complete!")
 
-    # Remove temporary notarization ZIP
     sh("rm '#{notarization_zip}'")
 
-    # Staple the notarization ticket to the app
     UI.message("Stapling notarization ticket...")
     sh("xcrun stapler staple '#{app_path}'")
 
-    # Create DMG
     dmg_path = "#{build_path}/release/#{app_name}.dmg"
     sh("rm -f '#{dmg_path}'") if File.exist?(dmg_path)
     sh("create-dmg --volname '#{app_name}' --codesign '#{certificate_name}' '#{dmg_path}' '#{app_path}'")
 
-    # Verify signatures
     puts "Verifying code signature..."
     sh("codesign --verify --deep --strict --verbose=2 '#{app_path}'")
     sh("spctl -a -t exec -vv '#{app_path}'")
     sh("codesign --verify --deep --strict --verbose=2 '#{dmg_path}'")
 
-    # Create Sparkle update ZIP
     app_zip_path = "#{app_path}.zip"
     sh("ditto -c -k --keepParent --sequesterRsrc #{app_path} #{app_zip_path}")
 
@@ -198,22 +177,18 @@ platform :mac do
 
     sparkle_output = sh("echo '#{sparkle_secret_key}' | #{sparkle_path}/bin/sign_update #{app_zip_path} --ed-key-file -")
 
-    # Parse signature from output: sparkle:edSignature="SIGNATURE" length="SIZE"
     signature_match = sparkle_output.match(/sparkle:edSignature="([^"]+)"/)
     ed_signature = signature_match ? signature_match[1] : ""
 
-    # Get version from xcconfig
     xcconfig_path = File.absolute_path("../Claw.xcconfig")
     version ||= sh("cat #{xcconfig_path} | grep APP_VERSION=").split("APP_VERSION = ").last.strip
 
     puts "Build completed successfully. version: #{version}, app_path: #{app_path}"
 
-    # Update appcast
     appcast_template_path = File.absolute_path("../appcast.template.xml")
     appcast_path = File.absolute_path("../appcast.xml")
     appcast_content = File.read(appcast_template_path)
 
-    # Get file size
     zip_size = File.size(app_zip_path)
     current_date = Time.now.strftime("%a, %d %b %Y %H:%M:%S %z")
 
@@ -239,25 +214,21 @@ platform :mac do
   lane :distribute_release do |options|
     setup_ci if ENV["CI"]
 
-    # Set distribution channel to stable
     xcconfig_path = File.absolute_path("../Claw.xcconfig")
     sh("sed -i '' 's/APP_DISTRIBUTION_CHANNEL = .*/APP_DISTRIBUTION_CHANNEL = stable/' #{xcconfig_path}")
 
     original_version = sh("grep 'APP_VERSION =' #{xcconfig_path}").split("APP_VERSION = ").last.strip
     version = find_available_version(original_version)
 
-    # Update version if changed
     if version != original_version
       sh("sed -i '' 's/APP_VERSION = #{original_version}/APP_VERSION = #{version}/' #{xcconfig_path}")
     end
 
-    # Create and sign release
     result = create_and_sign_release(version: version)
     version = result[:version]
     app_zip_path = result[:app_zip_path]
     dmg_path = result[:dmg_path]
 
-    # Create GitHub Release
     gh_token = load_secret("GH_WRITE_TOKEN")
     set_github_release(
       api_token: gh_token,
@@ -270,7 +241,6 @@ platform :mac do
       upload_assets: [dmg_path, app_zip_path],
     )
 
-    # Create PR with changes
     current_branch = sh("git rev-parse --abbrev-ref HEAD").strip
     new_branch_name = "release-v#{version}"
     sh("git add ../appcast.xml ../Claw.xcconfig && git commit -m 'Release v#{version}' --no-verify && git checkout -b #{new_branch_name} && git push origin #{new_branch_name} --no-verify")
@@ -294,14 +264,11 @@ platform :mac do
     certificate_name = options.fetch(:certificate_name, nil)
     certificate_sha1 = options.fetch(:certificate_sha1, nil)
 
-    # Extract entitlements
     entitlements_path = "#{build_path}/extracted_entitlements.plist"
     sh("codesign -d --entitlements :- '#{app_path}' > '#{entitlements_path}'")
 
-    # Strip debug symbols
     sh("strip -rSTx '#{app_binary_path}'")
 
-    # Find and strip all Mach-O binaries
     Dir.glob("#{app_path}/**/*").each do |file|
       next unless File.file?(file) && !File.symlink?(file)
 
@@ -322,17 +289,14 @@ platform :mac do
 
     puts "Using certificate to resign: #{certificate_name} (#{certificate_sha1})"
 
-    # Find signable components (deepest first)
     all_components = []
 
-    # Find bundles and frameworks
     Dir.glob("#{app_path}/**/*.{framework,appex,bundle,xpc,app}").each do |component|
       next if component == app_path
       depth = component.split("/").length
       all_components << { path: component, depth: depth }
     end
 
-    # Find standalone binaries (like ApprovalMCPServer)
     Dir.glob("#{app_path}/**/*").each do |file|
       next unless File.file?(file) && !File.symlink?(file)
       next if file.end_with?('.framework', '.appex', '.bundle', '.xpc', '.app')
@@ -349,10 +313,8 @@ platform :mac do
       end
     end
 
-    # Sort by depth (deepest first)
     all_components.sort_by! { |c| [-c[:depth], c[:path]] }
 
-    # Sign each component
     all_components.each do |component|
       component_name = File.basename(component[:path])
       puts "Signing: #{component_name}"
@@ -373,7 +335,6 @@ platform :mac do
       silent_sh("rm -f '#{temp_entitlements}'")
     end
 
-    # Sign main app
     puts "Signing: #{app_path}"
     silent_sh("codesign --force --sign #{certificate_sha1} --options runtime --timestamp --entitlements '#{entitlements_path}' '#{app_path}'")
     silent_sh("rm '#{entitlements_path}'")
