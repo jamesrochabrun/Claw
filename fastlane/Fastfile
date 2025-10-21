@@ -180,10 +180,26 @@ platform :mac do
     UI.message("Stapling notarization ticket...")
     sh("xcrun stapler staple '#{app_path}'")
 
-    # Create DMG
+    # Create DMG with /Applications symlink for drag-and-drop installation
     dmg_path = "#{build_path}/release/#{app_name}.dmg"
     sh("rm -f '#{dmg_path}'") if File.exist?(dmg_path)
-    sh("create-dmg --volname '#{app_name}' --codesign '#{certificate_name}' '#{dmg_path}' '#{app_path}'")
+
+    # Create temporary folder structure for DMG
+    temp_dmg_dir = "#{build_path}/dmg_temp"
+    sh("rm -rf '#{temp_dmg_dir}'")
+    sh("mkdir -p '#{temp_dmg_dir}'")
+
+    # Copy app to temp directory
+    sh("cp -R '#{app_path}' '#{temp_dmg_dir}/'")
+
+    # Create Applications symlink for drag-and-drop installation
+    sh("ln -s /Applications '#{temp_dmg_dir}/Applications'")
+
+    # Create and sign DMG from temp directory
+    sh("create-dmg --volname '#{app_name}' --codesign '#{certificate_name}' '#{dmg_path}' '#{temp_dmg_dir}'")
+
+    # Clean up temp directory
+    sh("rm -rf '#{temp_dmg_dir}'")
 
     # Verify signatures
     puts "Verifying code signature..."
