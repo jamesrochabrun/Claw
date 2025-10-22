@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B67B4F92E7FD5F3006A8EB2 /* ApprovalServerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B67B4F82E7FD5F3006A8EB2 /* ApprovalServerKit */; };
-		7B67B4FC2E7FD624006A8EB2 /* ClaudeCodeCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7B67B4FB2E7FD624006A8EB2 /* ClaudeCodeCore */; };
+		7B9D5AFF2EA8482E0081E0BE /* ClaudeCodeCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7B9D5AFE2EA8482E0081E0BE /* ClaudeCodeCore */; };
 		7BB57D2D2EA1BB4C00927023 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 7BB57D2C2EA1BB4C00927023 /* Sparkle */; };
 		7BB57D7F2EA2162900927023 /* Claw.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7BB57D7E2EA2162900927023 /* Claw.xcconfig */; };
 /* End PBXBuildFile section */
@@ -58,15 +58,11 @@
 		};
 		7B67B4DD2E7FD5C8006A8EB2 /* ClawTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = ClawTests;
 			sourceTree = "<group>";
 		};
 		7B67B4E72E7FD5C8006A8EB2 /* ClawUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = ClawUITests;
 			sourceTree = "<group>";
 		};
@@ -77,8 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B9D5AFF2EA8482E0081E0BE /* ClaudeCodeCore in Frameworks */,
 				7BB57D2D2EA1BB4C00927023 /* Sparkle in Frameworks */,
-				7B67B4FC2E7FD624006A8EB2 /* ClaudeCodeCore in Frameworks */,
 				7B67B4F92E7FD5F3006A8EB2 /* ApprovalServerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,8 +139,8 @@
 			name = Claw;
 			packageProductDependencies = (
 				7B67B4F82E7FD5F3006A8EB2 /* ApprovalServerKit */,
-				7B67B4FB2E7FD624006A8EB2 /* ClaudeCodeCore */,
 				7BB57D2C2EA1BB4C00927023 /* Sparkle */,
+				7B9D5AFE2EA8482E0081E0BE /* ClaudeCodeCore */,
 			);
 			productName = Claw;
 			productReference = 7B67B4CD2E7FD5C6006A8EB2 /* Claw.app */;
@@ -226,8 +222,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				7B67B4F72E7FD5F3006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeApprovalServer" */,
-				7B67B4FA2E7FD624006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */,
 				7BB57D2B2EA1BB4C00927023 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				7B9D5AFD2EA8482E0081E0BE /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7B67B4CE2E7FD5C6006A8EB2 /* Products */;
@@ -646,12 +642,12 @@
 				version = 1.1.0;
 			};
 		};
-		7B67B4FA2E7FD624006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */ = {
+		7B9D5AFD2EA8482E0081E0BE /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jamesrochabrun/ClaudeCodeUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.5;
+				minimumVersion = 1.6.6;
 			};
 		};
 		7BB57D2B2EA1BB4C00927023 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
@@ -670,9 +666,9 @@
 			package = 7B67B4F72E7FD5F3006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeApprovalServer" */;
 			productName = ApprovalServerKit;
 		};
-		7B67B4FB2E7FD624006A8EB2 /* ClaudeCodeCore */ = {
+		7B9D5AFE2EA8482E0081E0BE /* ClaudeCodeCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7B67B4FA2E7FD624006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */;
+			package = 7B9D5AFD2EA8482E0081E0BE /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */;
 			productName = ClaudeCodeCore;
 		};
 		7BB57D2C2EA1BB4C00927023 /* Sparkle */ = {
