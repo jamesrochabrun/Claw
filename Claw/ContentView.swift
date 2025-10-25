@@ -14,6 +14,10 @@ struct ContentView: View {
   var config: ClaudeCodeConfiguration {
     // Start with the SDK's NVM-aware configuration
     var config = ClaudeCodeConfiguration.withNvmSupport()
+
+    // FORCE Agent SDK backend for debugging (2-10x faster than headless)
+   config.backend = .agentSDK
+
     config.enableDebugLogging = true
     config.disallowedTools = ["MultiEdit"] // TODO: fix MultiEdit Tool.
     let homeDir = NSHomeDirectory()
