@@ -20,7 +20,8 @@
       <pubDate>Fri, 25 Oct 2025 08:26:00 -0700</pubDate>
       <enclosure
         url="https://github.com/jamesrochabrun/Claw/releases/download/v1.0.9/Claw.app.zip"
-        sparkle:version="1.0.9"
+        sparkle:version="1"
+        sparkle:shortVersionString="1.0.9"
         sparkle:edSignature="aZwxaJ/R7O0sfw6ZcS8CiDM0R5Xju8i3Zz/lO3Bq4eYuKj4F+0G/Df9H7CvW5W/DCBWMYRhNzP03bd09Of5oBw=="
         length="9087887"
         type="application/octet-stream" />
