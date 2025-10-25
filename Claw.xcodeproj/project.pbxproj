@@ -58,11 +58,15 @@
 		};
 		7B67B4DD2E7FD5C8006A8EB2 /* ClawTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = ClawTests;
 			sourceTree = "<group>";
 		};
 		7B67B4E72E7FD5C8006A8EB2 /* ClawUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = ClawUITests;
 			sourceTree = "<group>";
 		};
