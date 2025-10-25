@@ -62,13 +62,8 @@ final class UpdateChecker: NSObject {
   private func setupUpdater() {
     let hostBundle = Bundle.main
     let applicationBundle = Bundle.main
-    let userDriver = BackgroundUserDriver(
-      onReceivedUpdateInfo: { @MainActor [weak self] updateInfo in
-        self?.updateInfo = updateInfo
-      },
-      onReadyToInstall: { @MainActor [weak self] in
-        self?.complete(with: .success(.updateAvailable(info: self?.updateInfo)))
-      })
+    // Use SPUStandardUserDriver to show Sparkle's built-in update UI (alerts and progress windows)
+    let userDriver = SPUStandardUserDriver(hostBundle: hostBundle, delegate: nil)
 
     updater = SPUUpdater(
       hostBundle: hostBundle,
