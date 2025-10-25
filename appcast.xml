@@ -8,7 +8,6 @@
     <item>
       <title>Version 1.0.10</title>
       <link>https://github.com/jamesrochabrun/Claw</link>
-      <sparkle:version>1.0.10</sparkle:version>
       <sparkle:channel>stable</sparkle:channel>
       <description><![CDATA[
         Release version 1.0.10
