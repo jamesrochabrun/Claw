@@ -6,24 +6,27 @@
     <description>Claw app updates</description>
     <language>en</language>
     <item>
-      <title>Version 1.0.9</title>
+      <title>Version 1.0.10</title>
       <link>https://github.com/jamesrochabrun/Claw</link>
-      <sparkle:version>1.0.9</sparkle:version>
+      <sparkle:version>1.0.10</sparkle:version>
       <sparkle:channel>stable</sparkle:channel>
       <description><![CDATA[
-        Release version 1.0.9
+        Release version 1.0.10
 
         Security improvements:
         - Removed unnecessary dangerous entitlements (com.apple.security.cs.allow-unsigned-executable-memory and com.apple.security.cs.disable-library-validation)
         - Improved app security without affecting functionality
+
+        Updates:
+        - Fixed auto-update version detection by incrementing build number
       ]]></description>
-      <pubDate>Fri, 25 Oct 2025 08:26:00 -0700</pubDate>
+      <pubDate>Fri, 25 Oct 2025 15:51:00 -0700</pubDate>
       <enclosure
-        url="https://github.com/jamesrochabrun/Claw/releases/download/v1.0.9/Claw.app.zip"
-        sparkle:version="1"
-        sparkle:shortVersionString="1.0.9"
-        sparkle:edSignature="aZwxaJ/R7O0sfw6ZcS8CiDM0R5Xju8i3Zz/lO3Bq4eYuKj4F+0G/Df9H7CvW5W/DCBWMYRhNzP03bd09Of5oBw=="
-        length="9087887"
+        url="https://github.com/jamesrochabrun/Claw/releases/download/v1.0.10/Claw.app.zip"
+        sparkle:version="2"
+        sparkle:shortVersionString="1.0.10"
+        sparkle:edSignature="+TeFl3cSOzWrWsb6pVyvAUJ31SjMy9C0y8zzfFWErfimzXABngHLdBteujabdpaxsz+mGIPdrwcZ/FBNmnvxDg=="
+        length="9087867"
         type="application/octet-stream" />
     </item>
   </channel>

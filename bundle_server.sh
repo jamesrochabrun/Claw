@@ -23,6 +23,7 @@ POSSIBLE_PATHS=(
   "${BUILD_DIR}/../../../SourcePackages/checkouts/ClaudeCodeApprovalServer"
   "${PROJECT_DIR}/../../../SourcePackages/checkouts/ClaudeCodeApprovalServer"
   "${SRCROOT}/../../../SourcePackages/checkouts/ClaudeCodeApprovalServer"
+  "${SRCROOT}/build/derived_data/SourcePackages/checkouts/ClaudeCodeApprovalServer"
   ~/Library/Developer/Xcode/DerivedData/*/SourcePackages/checkouts/ClaudeCodeApprovalServer
 )
 

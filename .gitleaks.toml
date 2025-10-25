@@ -49,6 +49,10 @@ description = "Suspicious base64 encoded key (very long base64 strings)"
 regex = '''[A-Za-z0-9+/]{64,}={0,2}'''
 tags = ["key", "base64"]
 [rules.allowlist]
+paths = [
+	# Allow appcast.xml (contains public EdDSA signatures for update verification)
+	'''appcast\.xml''',
+]
 regexes = [
 	# Allow the legitimate public key in Info.plist (exactly 44 chars)
 	'''<key>SUPublicEDKey</key>\s*<string>[A-Za-z0-9+/]{43}=</string>''',
@@ -72,6 +76,9 @@ regexes = [
 
 	# Allow SUPublicEDKey in Info.plist (public key, not private)
 	'''SUPublicEDKey.*<string>[A-Za-z0-9+/]{43}=</string>''',
+
+	# Allow Sparkle edSignature in appcast.xml (public signature for verifying downloads)
+	'''sparkle:edSignature="[A-Za-z0-9+/]+=*"''',
 
 	# Allow appcast.xml references (public URLs)
 	'''raw\.githubusercontent\.com''',
