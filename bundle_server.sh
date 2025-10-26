@@ -71,15 +71,19 @@ cp "${SERVER_SOURCE}" "${SERVER_DEST}"
 # Make sure it's executable
 chmod +x "${SERVER_DEST}"
 
-# Sign with hardened runtime and entitlements
-echo "Signing ${SERVER_NAME} with hardened runtime..."
-codesign --force --sign "${EXPANDED_CODE_SIGN_IDENTITY}" \
-  --options runtime \
-  --entitlements "${SRCROOT}/Claw/Claw.entitlements" \
-  --timestamp \
-  "${SERVER_DEST}"
-
-echo "Successfully bundled and signed ClaudeCodeApprovalServer to ${SERVER_DEST}"
+# Sign with hardened runtime and entitlements (only if code signing is enabled)
+if [ "${CODE_SIGNING_ALLOWED}" = "YES" ] && [ -n "${EXPANDED_CODE_SIGN_IDENTITY}" ]; then
+  echo "Signing ${SERVER_NAME} with hardened runtime..."
+  codesign --force --sign "${EXPANDED_CODE_SIGN_IDENTITY}" \
+    --options runtime \
+    --entitlements "${SRCROOT}/Claw/Claw.entitlements" \
+    --timestamp \
+    "${SERVER_DEST}"
+  echo "Successfully bundled and signed ClaudeCodeApprovalServer to ${SERVER_DEST}"
+else
+  echo "Skipping code signing (CODE_SIGNING_ALLOWED=${CODE_SIGNING_ALLOWED})"
+  echo "Successfully bundled ClaudeCodeApprovalServer to ${SERVER_DEST}"
+fi
 
 # Verify the bundle
 if [ -f "${SERVER_DEST}" ]; then

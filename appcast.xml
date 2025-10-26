@@ -6,26 +6,23 @@
     <description>Claw app updates</description>
     <language>en</language>
     <item>
-      <title>Version 1.0.12</title>
+      <title>Version 1.0.13</title>
       <link>https://github.com/jamesrochabrun/Claw</link>
       <sparkle:channel>stable</sparkle:channel>
       <description><![CDATA[
-        Release version 1.0.12
+        Release version 1.0.13
 
-        **This is a test release** to demonstrate the auto-update UI working!
+        **Auto-update test release** with properly signed binaries!
 
-        When you launch v1.0.11, you should see a Sparkle alert saying:
-        "A new version of Claw is available! Version 1.0.12 is available—you have 1.0.11."
-
-        Click "Install Update" to see the complete update flow!
+        This release tests the complete auto-update flow from signed v1.0.12 to signed v1.0.13.
       ]]></description>
-      <pubDate>Fri, 25 Oct 2025 16:48:00 -0700</pubDate>
+      <pubDate>Fri, 25 Oct 2025 23:35:00 -0700</pubDate>
       <enclosure
-        url="https://github.com/jamesrochabrun/Claw/releases/download/v1.0.12/Claw.app.zip"
-        sparkle:version="4"
-        sparkle:shortVersionString="1.0.12"
-        sparkle:edSignature="Zm9kgLYyP9OFBXW2yPSEYWRwZhnSEZyLKq7Lu+lLRB8zK4OU5Wz2hri7g3cucfzaIPzjccU8N5f1KqL+Ti3nCA=="
-        length="9086730"
+        url="https://github.com/jamesrochabrun/Claw/releases/download/v1.0.13/Claw.app.zip"
+        sparkle:version="5"
+        sparkle:shortVersionString="1.0.13"
+        sparkle:edSignature="qRLjQrJkP5lDB9/4XNnKCv6kM+2NjosITdpcNn+MzTC8bNaRXV3+yxYVzR2CZf8K2f3bW8Y1doQwTPe9dIlHDg=="
+        length="9086740"
         type="application/octet-stream" />
     </item>
   </channel>
