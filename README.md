@@ -1,6 +1,6 @@
 ## Claw Code
 
-### Download latest version [here](https://github.com/jamesrochabrun/Claw/releases/download/v1.0.8/Claw.dmg)
+### Download latest version [here](https://github.com/jamesrochabrun/Claw/releases/download/v1.0.9/Claw-1.0.9.dmg)
 
 ![Image](https://github.com/user-attachments/assets/f854ceb6-9a63-464c-a6d4-499f272054bd)
 
