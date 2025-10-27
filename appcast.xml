@@ -6,19 +6,19 @@
     <description>Claw app updates</description>
     <language>en</language>
     <item>
-      <title>Version 1.0.8</title>
+      <title>Version 1.0.9</title>
       <link>https://github.com/jamesrochabrun/Claw</link>
-      <sparkle:version>1.0.8</sparkle:version>
+      <sparkle:version>1.0.9</sparkle:version>
       <sparkle:channel>stable</sparkle:channel>
       <description><![CDATA[
-        Release version 1.0.8
+        Release version 1.0.9
       ]]></description>
-      <pubDate>Mon, 20 Oct 2025 23:05:07 -0700</pubDate>
+      <pubDate>Sat, 26 Oct 2025 22:59:00 -0700</pubDate>
       <enclosure
-        url="https://github.com/jamesrochabrun/Claw/releases/download/v1.0.8/Claw.app.zip"
-        sparkle:version="1.0.8"
-        sparkle:edSignature="2iwG2D5ypifxwsbJXq8yjsZWBymh02oKXd5AU7go9KDMpnjJ7oTF0KiditsbUvbjl6tBrT20OtHDLAc9+JFECA=="
-        length="9087032"
+        url="https://github.com/jamesrochabrun/Claw/releases/download/v1.0.9/Claw.app.zip"
+        sparkle:version="1.0.9"
+        sparkle:edSignature="e1JkBsxJY+42z0M3Eo9XQ0ywzHCR6uqLL9oR2FtwT0L5KyBq5rvm9lDH2HSkCH2zPn5+bvBPgzfddrqtMVYNCg=="
+        length="9022549"
         type="application/octet-stream" />
     </item>
   </channel>
