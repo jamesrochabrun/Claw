@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/ClaudeCodeSDK",
       "state" : {
-        "revision" : "da2ceabba088b176baa60168a5dc987b07a5252f",
-        "version" : "1.1.8"
+        "revision" : "614db0c89c6589b73c3736c7098d5717333a114f",
+        "version" : "1.1.9"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/ClaudeCodeUI",
       "state" : {
-        "revision" : "cf9aada1ede37e3bcc387be767fe8b2eccea0a25",
-        "version" : "1.6.6"
+        "revision" : "1874e74d4d4e9b7454b2b423c76918c0f41be3a8",
+        "version" : "1.6.9"
       }
     },
     {
@@ -303,8 +303,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/SwiftAnthropic",
       "state" : {
-        "revision" : "6a87348bf105a0b81ffd681ce8cbc69658cd98db",
-        "version" : "2.1.9"
+        "revision" : "4f9e21b94e491138003903ff6c14ab4f04b6ba6c",
+        "version" : "2.2.0"
       }
     }
   ],

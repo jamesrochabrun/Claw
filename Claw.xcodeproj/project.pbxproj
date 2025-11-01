@@ -646,8 +646,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jamesrochabrun/ClaudeCodeUI";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.6;
+				kind = exactVersion;
+				version = 1.6.9;
 			};
 		};
 		7BB57D2B2EA1BB4C00927023 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
