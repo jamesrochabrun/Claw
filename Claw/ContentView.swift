@@ -15,8 +15,8 @@ struct ContentView: View {
     // Start with the SDK's NVM-aware configuration
     var config = ClaudeCodeConfiguration.withNvmSupport()
 
-    // FORCE Agent SDK backend for debugging (2-10x faster than headless)
-   config.backend = .agentSDK
+    // Use headless backend (default)
+    // Note: backend defaults to .headless, no need to set explicitly
 
     config.enableDebugLogging = true
     config.disallowedTools = ["MultiEdit"] // TODO: fix MultiEdit Tool.

@@ -1,5 +1,5 @@
 {
-  "originHash" : "a9c831e99389557fe151cf766520831881d8cb3d72d9547218cfb7789f54dad4",
+  "originHash" : "c31c80772cc979c4ca18eaf4ae40bc943b3a3b227f10f9a053403e0e3560de63",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "6584ea156411d7955fb9dff8a4488af15fce5a24",
         "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "claudecodesdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jamesrochabrun/ClaudeCodeSDK",
+      "state" : {
+        "revision" : "24509ebc6c1a3f36f03c0263f215f9ce5b91f685",
+        "version" : "1.2.1"
       }
     },
     {
@@ -285,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/SwiftAnthropic",
       "state" : {
-        "revision" : "6a87348bf105a0b81ffd681ce8cbc69658cd98db",
-        "version" : "2.1.9"
+        "revision" : "4f9e21b94e491138003903ff6c14ab4f04b6ba6c",
+        "version" : "2.2.0"
       }
     }
   ],
