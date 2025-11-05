@@ -20,6 +20,15 @@
       }
     },
     {
+      "identity" : "claudecodesdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jamesrochabrun/ClaudeCodeSDK",
+      "state" : {
+        "revision" : "de63ddc470d9a14fba0965b5bde7e5c61f5b9ef1",
+        "version" : "1.2.3"
+      }
+    },
+    {
       "identity" : "down",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/Down",
