@@ -17,7 +17,11 @@ struct ContentView: View {
     config.enableDebugLogging = true
     config.disallowedTools = ["MultiEdit"] // TODO: fix MultiEdit Tool.
     let homeDir = NSHomeDirectory()
-    
+
+    // Set default working directory to home directory
+    // This will be used only if user hasn't set a custom working directory in preferences
+    config.workingDirectory = homeDir
+
     // PRIORITY 1: Check for local Claude installation (usually the newest version)
     // This is typically installed via the Claude installer, not npm
     let localClaudePath = "\(homeDir)/.claude/local"
