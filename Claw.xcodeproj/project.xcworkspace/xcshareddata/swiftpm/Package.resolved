@@ -1,5 +1,5 @@
 {
-  "originHash" : "c31c80772cc979c4ca18eaf4ae40bc943b3a3b227f10f9a053403e0e3560de63",
+  "originHash" : "4001f98586e011d907a8c85d19639dac8bc608c72658f7e61aa5fd7f1eb78661",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "de63ddc470d9a14fba0965b5bde7e5c61f5b9ef1",
         "version" : "1.2.3"
+      }
+    },
+    {
+      "identity" : "claudecodeui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jamesrochabrun/ClaudeCodeUI",
+      "state" : {
+        "revision" : "43dd6385e1d1fdfb519e826d50842538f89605a6",
+        "version" : "1.7.3"
       }
     },
     {
