@@ -2,7 +2,7 @@
 // This file contains the app version and distribution channel
 // Automatically updated during release process
 
-APP_VERSION = 1.0.9
+APP_VERSION = 1.2.0
 APP_DISTRIBUTION_CHANNEL = stable
 
 // Development Team ID (set this to your Apple Developer Team ID)

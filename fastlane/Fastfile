@@ -116,8 +116,21 @@ platform :mac do
     # Load secrets
     personal_github_access_token = load_secret("FASTLANE_GITHUB_ACCESS_TOKEN")
 
-    # Skip Match - use existing local certificate
-    # Certificate already installed: Developer ID Application: James Rochabrun (YOUR_TEAM_ID)
+    # Install certificates via Match (only in CI)
+    if ENV["CI"]
+      match_password = load_secret("MATCH_PASSWORD")
+      team_id = load_secret("APPLE_TEAM_ID")
+
+      match(
+        type: "developer_id",
+        readonly: true,
+        team_id: team_id,
+        app_identifier: "com.jamesrochabrun.claw",
+        git_url: "https://github.com/jamesrochabrun/certificates",
+        git_basic_authorization: Base64.strict_encode64(personal_github_access_token)
+      )
+    end
+
     update_code_signing_settings(
       code_sign_identity: "Developer ID Application",
       use_automatic_signing: false,
@@ -167,7 +180,15 @@ platform :mac do
     # Notarize the ZIP
     key_id = load_secret("NOTARY_KEY_ID")
     issuer_id = load_secret("NOTARY_ISSUER_ID")
+
+    # Create P8 file from secret (in CI) or use existing file (locally)
     key_path = File.expand_path("~/private_keys/AuthKey_#{key_id}.p8")
+    if ENV["CI"] || !File.exist?(key_path)
+      notary_p8_base64 = load_secret("NOTARY_P8")
+      sh("mkdir -p ~/private_keys")
+      File.write(key_path, Base64.decode64(notary_p8_base64))
+      UI.message("Created P8 file at #{key_path}")
+    end
 
     UI.message("Starting notarization...")
     sh("xcrun notarytool submit '#{notarization_zip}' --key '#{key_path}' --key-id '#{key_id}' --issuer '#{issuer_id}' --wait")
