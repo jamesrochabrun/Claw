@@ -46,3 +46,5 @@ fastlane/.env
 .git-secrets-to-remove.txt
 .git-filter-repo-expressions.txt
 clean_git_history.sh
+# Claude Code local configuration
+.claude/

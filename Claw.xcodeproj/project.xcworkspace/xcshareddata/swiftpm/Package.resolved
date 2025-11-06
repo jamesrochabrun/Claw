@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/ClaudeCodeUI",
       "state" : {
-        "revision" : "43dd6385e1d1fdfb519e826d50842538f89605a6",
-        "version" : "1.7.3"
+        "revision" : "a94ce8904ae4985ac299d96cb62693928544e8e9",
+        "version" : "1.7.4"
       }
     },
     {
@@ -276,8 +276,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/swift-service-lifecycle.git",
       "state" : {
-        "revision" : "0fcc4c9c2d58dd98504c06f7308c86de775396ff",
-        "version" : "2.9.0"
+        "revision" : "1de37290c0ab3c5a96028e0f02911b672fd42348",
+        "version" : "2.9.1"
       }
     },
     {
