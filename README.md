@@ -1,8 +1,26 @@
 ## Claw Code
 
-### Download latest version [here](https://github.com/jamesrochabrun/Claw/releases/download/v1.0.9/Claw-1.0.9.dmg)
+A friendly macOS wrapper around the [Claude Code SDK](https://github.com/anthropics/anthropic-sdk-typescript), bringing the power of Claude's coding capabilities to a native Mac app experience.
+
+### Download latest version [here](https://github.com/jamesrochabrun/Claw/releases/download/v1.2.1/Claw-1.2.1.dmg)
 
 ![Image](https://github.com/user-attachments/assets/f854ceb6-9a63-464c-a6d4-499f272054bd)
+
+## What is Claw Code?
+
+Claw Code makes it easy to use Claude Code directly from your Mac. It's a lightweight wrapper that packages the Claude Code SDK into an intuitive macOS application, giving you all the power of Claude's development assistance with the convenience of a native app.
+
+## Requirements
+
+- [Claude Code CLI](https://docs.claude.com/en/docs/claude-code) installed on your system
+
+## Features
+
+- **Plan Mode**: Let Claude think through complex tasks before execution
+- **MCP Integration**: Full support for Model Context Protocol to extend Claude's capabilities
+- **Custom System Prompts**: Transform Claude Code into any specialized agent you need
+- **Native macOS Experience**: Seamless integration with your Mac workflow
+- **Xcode Integration**: Work directly with your Xcode projects
 
 ## Claude Code in a macOS App
 
