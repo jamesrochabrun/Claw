@@ -12,7 +12,9 @@ Claw Code makes it easy to use Claude Code directly from your Mac. It's a lightw
 
 ## Requirements
 
-- [Claude Code CLI](https://docs.claude.com/en/docs/claude-code) installed on your system
+- [Claude Code CLI](https://docs.claude.com/en/docs/claude-code) must be installed and authenticated on your system
+- After installing the CLI, authenticate using `claude auth login`
+- Claw will use your Claude Code CLI credentials automatically
 
 ## Features
 
