@@ -1,5 +1,5 @@
 {
-  "originHash" : "4001f98586e011d907a8c85d19639dac8bc608c72658f7e61aa5fd7f1eb78661",
+  "originHash" : "a9c831e99389557fe151cf766520831881d8cb3d72d9547218cfb7789f54dad4",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -26,15 +26,6 @@
       "state" : {
         "revision" : "de63ddc470d9a14fba0965b5bde7e5c61f5b9ef1",
         "version" : "1.2.3"
-      }
-    },
-    {
-      "identity" : "claudecodeui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jamesrochabrun/ClaudeCodeUI",
-      "state" : {
-        "revision" : "43dd6385e1d1fdfb519e826d50842538f89605a6",
-        "version" : "1.7.3"
       }
     },
     {
@@ -276,8 +267,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/swift-service-lifecycle.git",
       "state" : {
-        "revision" : "0fcc4c9c2d58dd98504c06f7308c86de775396ff",
-        "version" : "2.9.0"
+        "revision" : "1de37290c0ab3c5a96028e0f02911b672fd42348",
+        "version" : "2.9.1"
       }
     },
     {
