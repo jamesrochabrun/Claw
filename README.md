@@ -1,6 +1,6 @@
 ## Claw Code
 
-A friendly macOS wrapper around the [Claude Code SDK](https://github.com/anthropics/anthropic-sdk-typescript), bringing the power of Claude's coding capabilities to a native Mac app experience.
+A friendly macOS wrapper around the Claude Code SDK, bringing the power of Claude's coding capabilities to a native Mac app experience.
 
 ### Download latest version [here](https://github.com/jamesrochabrun/Claw/releases/download/v1.2.1/Claw-1.2.1.dmg)
 
