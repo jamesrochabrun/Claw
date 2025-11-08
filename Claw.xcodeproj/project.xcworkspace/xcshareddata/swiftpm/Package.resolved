@@ -1,5 +1,5 @@
 {
-  "originHash" : "4001f98586e011d907a8c85d19639dac8bc608c72658f7e61aa5fd7f1eb78661",
+  "originHash" : "dabb443d44192974e8008105c85d4da3611bccec79749035d8f5e0804318db05",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/ClaudeCodeUI",
       "state" : {
-        "revision" : "a94ce8904ae4985ac299d96cb62693928544e8e9",
-        "version" : "1.7.4"
+        "revision" : "780ca9e28d51b775ccb5810532c218b9b881f25f",
+        "version" : "1.7.7"
       }
     },
     {
@@ -213,8 +213,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio-extras.git",
       "state" : {
-        "revision" : "b87fdbf492c8fd5ac860e642c714d2d24156990a",
-        "version" : "1.30.0"
+        "revision" : "7ee281d816fa8e5f3967a2c294035a318ea551c7",
+        "version" : "1.31.0"
       }
     },
     {
