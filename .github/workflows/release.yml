@@ -1,9 +1,11 @@
 name: Release
 
+# Disabled automatic releases - using manual release process instead
+# To enable: uncomment the push.tags section below
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  # push:
+  #   tags:
+  #     - 'v*.*.*'
   workflow_dispatch:
     inputs:
       version:
