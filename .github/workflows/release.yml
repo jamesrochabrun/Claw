@@ -31,7 +31,7 @@ jobs:
           brew install create-dmg
           bundle install
 
-      - name: Configure secrets
+      - name: Configure secrets and git auth
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           FASTLANE_GITHUB_ACCESS_TOKEN: ${{ secrets.FASTLANE_GITHUB_ACCESS_TOKEN }}
@@ -43,8 +43,9 @@ jobs:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           CERTIFICATE_SHA1: ${{ secrets.CERTIFICATE_SHA1 }}
         run: |
-          # Store secrets in keychain-like fashion for Fastlane
-          echo "Secrets configured"
+          # Configure git to use the GitHub token for authentication
+          git config --global url."https://${FASTLANE_GITHUB_ACCESS_TOKEN}@github.com/".insteadOf "https://github.com/"
+          echo "Secrets configured and git authentication set up"
 
       - name: Run Fastlane distribute_release
         env:
