@@ -2,7 +2,7 @@
 
 A friendly macOS wrapper around the Claude Code SDK, bringing the power of Claude's coding capabilities to a native Mac app experience.
 
-### Download latest version [here](https://github.com/jamesrochabrun/Claw/releases/download/v1.2.1/Claw-1.2.1.dmg)
+### Download latest version [here](https://github.com/jamesrochabrun/Claw/releases/download/v1.2.4/Claw-1.2.4.dmg)
 
 ![Image](https://github.com/user-attachments/assets/f854ceb6-9a63-464c-a6d4-499f272054bd)
 
