@@ -1,5 +1,5 @@
 {
-  "originHash" : "dabb443d44192974e8008105c85d4da3611bccec79749035d8f5e0804318db05",
+  "originHash" : "c31c80772cc979c4ca18eaf4ae40bc943b3a3b227f10f9a053403e0e3560de63",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -29,12 +29,12 @@
       }
     },
     {
-      "identity" : "claudecodeui",
+      "identity" : "codewhisper",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jamesrochabrun/ClaudeCodeUI",
+      "location" : "https://github.com/jamesrochabrun/CodeWhisper",
       "state" : {
-        "revision" : "31f9381ac503ee2c1965500973bbb81b17522008",
-        "version" : "1.7.9"
+        "revision" : "639c71b5cc0d73be70ff758f685b536c56274155",
+        "version" : "1.0.0"
       }
     },
     {
@@ -114,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-async-algorithms.git",
       "state" : {
-        "revision" : "042e1c4d9d19748c9c228f8d4ebc97bb1e339b0b",
-        "version" : "1.0.4"
+        "revision" : "2773d4125311133a2f705ec374c363a935069d45",
+        "version" : "1.1.0"
       }
     },
     {
@@ -305,6 +305,15 @@
       "state" : {
         "revision" : "4f9e21b94e491138003903ff6c14ab4f04b6ba6c",
         "version" : "2.2.0"
+      }
+    },
+    {
+      "identity" : "swiftopenai",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jamesrochabrun/SwiftOpenAI.git",
+      "state" : {
+        "revision" : "fe1bc41c9ae798b4f7bf2deaeaf29d8719adcc0c",
+        "version" : "4.4.4"
       }
     }
   ],
