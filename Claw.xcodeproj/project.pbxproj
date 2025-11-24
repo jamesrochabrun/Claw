@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B67B4F92E7FD5F3006A8EB2 /* ApprovalServerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B67B4F82E7FD5F3006A8EB2 /* ApprovalServerKit */; };
+		7B7ADB802ED5108400ADC068 /* ClaudeCodeCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7ADB7F2ED5108400ADC068 /* ClaudeCodeCore */; };
 		7B9D979A2ED0F86400B1716A /* ClaudeCodeCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7B9D97992ED0F86400B1716A /* ClaudeCodeCore */; };
 		7BB57D2D2EA1BB4C00927023 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 7BB57D2C2EA1BB4C00927023 /* Sparkle */; };
 		7BB57D7F2EA2162900927023 /* Claw.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7BB57D7E2EA2162900927023 /* Claw.xcconfig */; };
@@ -79,6 +80,7 @@
 				7B9D979A2ED0F86400B1716A /* ClaudeCodeCore in Frameworks */,
 				7BFBAE882EBC6EA1003D084C /* ClaudeCodeCore in Frameworks */,
 				7BFBAD9F2EBABDA3003D084C /* ClaudeCodeCore in Frameworks */,
+				7B7ADB802ED5108400ADC068 /* ClaudeCodeCore in Frameworks */,
 				7BF966612ECF02F6008D5AA2 /* ClaudeCodeCore in Frameworks */,
 				7BB57D2D2EA1BB4C00927023 /* Sparkle in Frameworks */,
 				7B67B4F92E7FD5F3006A8EB2 /* ApprovalServerKit in Frameworks */,
@@ -150,6 +152,7 @@
 				7BFBAE872EBC6EA1003D084C /* ClaudeCodeCore */,
 				7BF966602ECF02F6008D5AA2 /* ClaudeCodeCore */,
 				7B9D97992ED0F86400B1716A /* ClaudeCodeCore */,
+				7B7ADB7F2ED5108400ADC068 /* ClaudeCodeCore */,
 			);
 			productName = Claw;
 			productReference = 7B67B4CD2E7FD5C6006A8EB2 /* Claw.app */;
@@ -232,7 +235,7 @@
 			packageReferences = (
 				7B67B4F72E7FD5F3006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeApprovalServer" */,
 				7BB57D2B2EA1BB4C00927023 /* XCRemoteSwiftPackageReference "Sparkle" */,
-				7B9D97982ED0F86400B1716A /* XCLocalSwiftPackageReference "../ClaudeCodeUI" */,
+				7B7ADB7E2ED5108400ADC068 /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7B67B4CE2E7FD5C6006A8EB2 /* Products */;
@@ -456,6 +459,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Claw/Claw.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -642,13 +646,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		7B9D97982ED0F86400B1716A /* XCLocalSwiftPackageReference "../ClaudeCodeUI" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../ClaudeCodeUI;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		7B67B4F72E7FD5F3006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeApprovalServer" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -656,6 +653,14 @@
 			requirement = {
 				kind = exactVersion;
 				version = 1.1.0;
+			};
+		};
+		7B7ADB7E2ED5108400ADC068 /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jamesrochabrun/ClaudeCodeUI";
+			requirement = {
+				kind = exactVersion;
+				version = 1.8.2;
 			};
 		};
 		7BB57D2B2EA1BB4C00927023 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
@@ -673,6 +678,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7B67B4F72E7FD5F3006A8EB2 /* XCRemoteSwiftPackageReference "ClaudeCodeApprovalServer" */;
 			productName = ApprovalServerKit;
+		};
+		7B7ADB7F2ED5108400ADC068 /* ClaudeCodeCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B7ADB7E2ED5108400ADC068 /* XCRemoteSwiftPackageReference "ClaudeCodeUI" */;
+			productName = ClaudeCodeCore;
 		};
 		7B9D97992ED0F86400B1716A /* ClaudeCodeCore */ = {
 			isa = XCSwiftPackageProductDependency;
