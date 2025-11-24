@@ -1,5 +1,5 @@
 {
-  "originHash" : "4001f98586e011d907a8c85d19639dac8bc608c72658f7e61aa5fd7f1eb78661",
+  "originHash" : "dabb443d44192974e8008105c85d4da3611bccec79749035d8f5e0804318db05",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/ClaudeCodeUI",
       "state" : {
-        "revision" : "2ad3c9e2de8fb57e766d948d91f1a84fa011f32f",
-        "version" : "1.8.2"
+        "revision" : "b7ad6ab73a4515117b3d712508f14ca0106956f1",
+        "version" : "1.8.3"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jamesrochabrun/CodeWhisper",
       "state" : {
-        "revision" : "3fe8089a39332169c9a4b27c416797a3c30ef35e",
-        "version" : "1.0.2"
+        "revision" : "eda5c9a12274800ac2327d48e1970b1fce900c02",
+        "version" : "1.0.3"
       }
     },
     {
