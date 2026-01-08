@@ -56,7 +56,8 @@ struct ContentView: View {
         workingDirectoryToolTip: "Tip: Select a folder to enable AI assistance",
         appIconAssetName: "claudeCodeSmall",
         showSystemPromptFields: true,
-        showVoiceModeButton: true))
+        showVoiceModeButton: false,
+        availableVoiceModes: []))
     .background(colorScheme == .dark ? Color(hue: 0.08, saturation: 0.25, brightness: 0.1) : .clear)
   }
 
