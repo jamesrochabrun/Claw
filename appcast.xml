@@ -6,6 +6,22 @@
     <description>Claw app updates</description>
     <language>en</language>
     <item>
+      <title>Version 1.3.3</title>
+      <link>https://github.com/jamesrochabrun/Claw</link>
+      <sparkle:version>1.3.3</sparkle:version>
+      <sparkle:channel>stable</sparkle:channel>
+      <description><![CDATA[
+        Release version 1.3.3
+      ]]></description>
+      <pubDate>Tue, 13 Jan 2026 16:12:19 -0800</pubDate>
+      <enclosure
+        url="https://github.com/jamesrochabrun/Claw/releases/download/1.3.3/Claw.app.zip"
+        sparkle:version="1.3.3"
+        sparkle:edSignature="mdwJJZJcmd9Hc441UbFjb9S1z4Mn/5+BqFFFgIoJpEQDTn+kjUDmu5zziGIwfeaUPDhCXIeXTe8H9Bvq1r40Bg=="
+        length="11298912"
+        type="application/octet-stream" />
+    </item>
+    <item>
       <title>Version 1.2.4</title>
       <link>https://github.com/jamesrochabrun/Claw</link>
       <sparkle:version>1.2.4</sparkle:version>
